@@ -9,13 +9,16 @@ struct MemoListView: View {
     @State private var viewModel = MemoListViewModel()
 
     var body: some View {
-        Group {
-            if viewModel.pinnedMemos.isEmpty && viewModel.otherMemos.isEmpty &&
-                viewModel.openMemos.isEmpty && viewModel.closedMemos.isEmpty {
-                emptyStateView
-            } else {
-                memoList
+        VStack(spacing: 0) {
+            Group {
+                if viewModel.pinnedMemos.isEmpty && viewModel.otherMemos.isEmpty &&
+                    viewModel.openMemos.isEmpty && viewModel.closedMemos.isEmpty {
+                    emptyStateView
+                } else {
+                    memoList
+                }
             }
+            AdBannerView()
         }
         .navigationTitle("QuickMemo")
         .toolbar {

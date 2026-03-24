@@ -13,39 +13,42 @@ struct MemoDetailView: View {
     @State private var selectedLabelIDs: [UUID] = []
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                TextField("タイトル", text: $viewModel.title)
-                    .font(.title2)
-                    .fontWeight(.semibold)
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    TextField("タイトル", text: $viewModel.title)
+                        .font(.title2)
+                        .fontWeight(.semibold)
 
-                Divider()
-
-                if gitHubAccount.isLinked {
-                    labelsSection
                     Divider()
+
+                    if gitHubAccount.isLinked {
+                        labelsSection
+                        Divider()
+                    }
+
+                    TextEditor(text: $viewModel.body)
+                        .font(.body)
+                        .frame(minHeight: 200)
+                        .scrollContentBackground(.hidden)
+
+                    Divider()
+
+                    statusSection
+
+                    if gitHubAccount.isLinked {
+                        syncStatusSection
+                    }
+
+                    metadataSection
+
+                    if gitHubAccount.isLinked, memo.githubIssueURL != nil {
+                        gitHubLinkSection
+                    }
                 }
-
-                TextEditor(text: $viewModel.body)
-                    .font(.body)
-                    .frame(minHeight: 200)
-                    .scrollContentBackground(.hidden)
-
-                Divider()
-
-                statusSection
-
-                if gitHubAccount.isLinked {
-                    syncStatusSection
-                }
-
-                metadataSection
-
-                if gitHubAccount.isLinked, memo.githubIssueURL != nil {
-                    gitHubLinkSection
-                }
+                .padding()
             }
-            .padding()
+            AdBannerView()
         }
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)

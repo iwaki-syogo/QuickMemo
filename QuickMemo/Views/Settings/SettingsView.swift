@@ -2,17 +2,26 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(GitHubAccount.self) private var gitHubAccount
+    @Environment(StoreKitService.self) private var storeKitService
     @State private var authService = GitHubAuthService()
     @State private var isAuthenticating = false
     @State private var errorMessage: String?
 
     var body: some View {
-        List {
-            gitHubSection
+        VStack(spacing: 0) {
+            List {
+                gitHubSection
 
-            appInfoSection
+                adFreeSection
+
+                appInfoSection
+            }
+            AdBannerView()
         }
         .navigationTitle("設定")
+        .task {
+            await storeKitService.loadProduct()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .alert("エラー", isPresented: .init(
             get: { errorMessage != nil },
@@ -79,6 +88,49 @@ struct SettingsView: View {
                     }
                 }
                 .disabled(isAuthenticating)
+            }
+        }
+    }
+
+    private var adFreeSection: some View {
+        Section("広告を非表示にする") {
+            if storeKitService.isAdFree {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                    Text("購入済み")
+                }
+            } else {
+                Button {
+                    Task {
+                        await storeKitService.purchase()
+                    }
+                } label: {
+                    HStack {
+                        Text("広告を非表示にする")
+                        Spacer()
+                        if storeKitService.isPurchasing {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else if let product = storeKitService.adFreeProduct {
+                            Text(product.displayPrice)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .disabled(storeKitService.isPurchasing || storeKitService.adFreeProduct == nil)
+
+                Button("購入を復元") {
+                    Task {
+                        await storeKitService.restore()
+                    }
+                }
+            }
+
+            if let error = storeKitService.errorMessage {
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.red)
             }
         }
     }
