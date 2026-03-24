@@ -1,7 +1,7 @@
-# QuickMemo
+# GitMemo
 
 ## Overview
-QuickMemo is a fast, lightweight memo app for iOS with GitHub sync and widget support.
+GitMemo is a fast, lightweight memo app for iOS with GitHub sync and widget support.
 
 ## Tech Stack
 - **UI**: SwiftUI

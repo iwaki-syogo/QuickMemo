@@ -25,6 +25,7 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
         PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo
+        INFOPLIST_KEY_CFBundleDisplayName: GitMemo
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
     info:
       path: QuickMemo/Info.plist
@@ -50,7 +51,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo.Widget
-        INFOPLIST_KEY_CFBundleDisplayName: QuickMemo Widget
+        INFOPLIST_KEY_CFBundleDisplayName: GitMemo Widget
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
         CURRENT_PROJECT_VERSION: 1
         MARKETING_VERSION: 1.0.0
