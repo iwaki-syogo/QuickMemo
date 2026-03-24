@@ -3,11 +3,15 @@ import SwiftData
 
 struct MemoListView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(GitHubAccount.self) private var gitHubAccount
+    @Environment(SyncService.self) private var syncService
     @State private var viewModel = MemoListViewModel()
 
     var body: some View {
         Group {
-            if viewModel.pinnedMemos.isEmpty && viewModel.otherMemos.isEmpty {
+            if viewModel.pinnedMemos.isEmpty && viewModel.otherMemos.isEmpty &&
+                viewModel.openMemos.isEmpty && viewModel.closedMemos.isEmpty {
                 emptyStateView
             } else {
                 memoList
@@ -26,7 +30,16 @@ struct MemoListView: View {
         }
         .onAppear {
             viewModel.setModelContext(modelContext)
-            viewModel.fetchMemos()
+            viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                Task {
+                    await syncService.retryFailedAndPending(account: gitHubAccount, context: modelContext)
+                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                }
+            }
         }
     }
 
@@ -50,55 +63,85 @@ struct MemoListView: View {
             if !viewModel.pinnedMemos.isEmpty {
                 Section("ピン留め") {
                     ForEach(viewModel.pinnedMemos, id: \.id) { memo in
-                        NavigationLink {
-                            MemoDetailView(memo: memo)
-                        } label: {
-                            MemoRowView(memo: memo)
-                        }
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                viewModel.togglePin(memo)
-                            } label: {
-                                SwiftUI.Label("ピン解除", systemImage: "pin.slash")
-                            }
-                            .tint(.orange)
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button(role: .destructive) {
-                                viewModel.deleteMemo(memo)
-                            } label: {
-                                SwiftUI.Label("削除", systemImage: "trash")
-                            }
-                        }
+                        memoNavigationLink(memo: memo, pinAction: "ピン解除", pinIcon: "pin.slash")
                     }
                 }
             }
 
-            Section {
-                ForEach(viewModel.otherMemos, id: \.id) { memo in
-                    NavigationLink {
-                        MemoDetailView(memo: memo)
-                    } label: {
-                        MemoRowView(memo: memo)
-                    }
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            viewModel.togglePin(memo)
-                        } label: {
-                            SwiftUI.Label("ピン留め", systemImage: "pin")
+            if gitHubAccount.isLinked {
+                if !viewModel.openMemos.isEmpty {
+                    Section("Open") {
+                        ForEach(viewModel.openMemos, id: \.id) { memo in
+                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
-                        .tint(.orange)
                     }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            viewModel.deleteMemo(memo)
-                        } label: {
-                            SwiftUI.Label("削除", systemImage: "trash")
+                }
+
+                if !viewModel.closedMemos.isEmpty {
+                    Section("Closed") {
+                        ForEach(viewModel.closedMemos, id: \.id) { memo in
+                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
+                        }
+                    }
+                }
+            } else {
+                if !viewModel.otherMemos.isEmpty {
+                    Section {
+                        ForEach(viewModel.otherMemos, id: \.id) { memo in
+                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
                     }
                 }
             }
         }
         .listStyle(.insetGrouped)
+    }
+
+    private func memoNavigationLink(memo: Memo, pinAction: String, pinIcon: String) -> some View {
+        NavigationLink {
+            MemoDetailView(memo: memo)
+        } label: {
+            HStack {
+                MemoRowView(memo: memo)
+
+                if memo.syncStatus == .failed {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
+            }
+        }
+        .swipeActions(edge: .leading) {
+            Button {
+                viewModel.togglePin(memo)
+                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+            } label: {
+                SwiftUI.Label(pinAction, systemImage: pinIcon)
+            }
+            .tint(.orange)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button(role: .destructive) {
+                viewModel.deleteMemo(memo)
+                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+            } label: {
+                SwiftUI.Label("削除", systemImage: "trash")
+            }
+
+            if gitHubAccount.isLinked, memo.githubIssueURL != nil {
+                Button {
+                    openInGitHub(memo)
+                } label: {
+                    SwiftUI.Label("GitHubで開く", systemImage: "arrow.up.right")
+                }
+                .tint(.purple)
+            }
+        }
+    }
+
+    private func openInGitHub(_ memo: Memo) {
+        guard let urlString = memo.githubIssueURL,
+              let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
     }
 }

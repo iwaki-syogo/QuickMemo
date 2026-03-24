@@ -9,6 +9,7 @@ class InputViewModel {
 
     private var modelContext: ModelContext?
     private var hasSaved = false
+    private(set) var savedMemo: Memo?
 
     func setModelContext(_ context: ModelContext) {
         self.modelContext = context
@@ -25,6 +26,7 @@ class InputViewModel {
         )
         modelContext.insert(memo)
         try? modelContext.save()
+        savedMemo = memo
         hasSaved = true
     }
 }

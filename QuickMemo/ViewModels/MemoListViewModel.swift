@@ -6,6 +6,8 @@ import Observation
 class MemoListViewModel {
     var pinnedMemos: [Memo] = []
     var otherMemos: [Memo] = []
+    var openMemos: [Memo] = []
+    var closedMemos: [Memo] = []
 
     private var modelContext: ModelContext?
 
@@ -13,7 +15,7 @@ class MemoListViewModel {
         self.modelContext = context
     }
 
-    func fetchMemos() {
+    func fetchMemos(isGitHubLinked: Bool = false) {
         guard let modelContext else { return }
 
         let descriptor = FetchDescriptor<Memo>(
@@ -23,10 +25,22 @@ class MemoListViewModel {
         do {
             let allMemos = try modelContext.fetch(descriptor)
             pinnedMemos = allMemos.filter { $0.isPinned }
-            otherMemos = allMemos.filter { !$0.isPinned }
+
+            if isGitHubLinked {
+                let unpinned = allMemos.filter { !$0.isPinned }
+                openMemos = unpinned.filter { $0.status == .open }
+                closedMemos = unpinned.filter { $0.status == .closed }
+                otherMemos = []
+            } else {
+                otherMemos = allMemos.filter { !$0.isPinned }
+                openMemos = []
+                closedMemos = []
+            }
         } catch {
             pinnedMemos = []
             otherMemos = []
+            openMemos = []
+            closedMemos = []
         }
     }
 
@@ -34,13 +48,11 @@ class MemoListViewModel {
         guard let modelContext else { return }
         modelContext.delete(memo)
         try? modelContext.save()
-        fetchMemos()
     }
 
     func togglePin(_ memo: Memo) {
         memo.isPinned.toggle()
         memo.updatedAt = Date()
         try? modelContext?.save()
-        fetchMemos()
     }
 }

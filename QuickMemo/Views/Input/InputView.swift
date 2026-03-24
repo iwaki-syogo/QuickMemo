@@ -5,6 +5,8 @@ struct InputView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dismiss) private var dismiss
+    @Environment(GitHubAccount.self) private var gitHubAccount
+    @Environment(SyncService.self) private var syncService
 
     @State private var viewModel = InputViewModel()
     @FocusState private var isTitleFocused: Bool
@@ -38,11 +40,22 @@ struct InputView: View {
         }
         .onDisappear {
             viewModel.save()
+            syncNewMemo()
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .inactive || newPhase == .background {
                 viewModel.save()
+                syncNewMemo()
             }
+        }
+    }
+
+    private func syncNewMemo() {
+        guard let memo = viewModel.savedMemo,
+              gitHubAccount.isLinked, gitHubAccount.hasRepository else { return }
+
+        Task {
+            await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
         }
     }
 }
