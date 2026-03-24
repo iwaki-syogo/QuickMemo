@@ -29,6 +29,7 @@ targets:
     info:
       path: QuickMemo/Info.plist
       properties:
+        ITSAppUsesNonExemptEncryption: false
         CFBundleURLTypes:
           - CFBundleURLSchemes:
               - quickmemo
@@ -43,6 +44,7 @@ targets:
     info:
       path: QuickMemoWidget/Info.plist
       properties:
+        ITSAppUsesNonExemptEncryption: false
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
