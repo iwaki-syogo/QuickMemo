@@ -32,3 +32,24 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLSchemes:
               - quickmemo
+    dependencies:
+      - target: QuickMemoWidget
+
+  QuickMemoWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - QuickMemoWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo.Widget
+        INFOPLIST_KEY_CFBundleDisplayName: QuickMemo Widget
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        GENERATE_INFOPLIST_FILE: YES
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0.0
+        SKIP_INSTALL: YES
+        ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME: WidgetBackground
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../../Frameworks"
+    entitlements:
+      path: QuickMemoWidget/QuickMemoWidget.entitlements

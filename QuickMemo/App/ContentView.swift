@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var showNewMemo: Bool
+
     var body: some View {
         NavigationStack {
             MemoListView()
@@ -12,6 +14,9 @@ struct ContentView: View {
                             Image(systemName: "gearshape")
                         }
                     }
+                }
+                .navigationDestination(isPresented: $showNewMemo) {
+                    InputView()
                 }
         }
     }
