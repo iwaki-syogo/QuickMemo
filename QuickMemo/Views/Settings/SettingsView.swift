@@ -15,6 +15,8 @@ struct SettingsView: View {
 
                 adFreeSection
 
+                legalSection
+
                 appInfoSection
             }
             AdBannerView()
@@ -142,6 +144,49 @@ struct SettingsView: View {
                 Text(error)
                     .font(.caption)
                     .foregroundStyle(.red)
+            }
+        }
+    }
+
+    private var legalSection: some View {
+        Section("法的情報") {
+            if let url = URL(string: "https://iwaki-syogo.github.io/QuickMemo/privacy-policy") {
+                Link(destination: url) {
+                    HStack {
+                        Text("プライバシーポリシー")
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+
+            if let url = URL(string: "https://iwaki-syogo.github.io/QuickMemo/terms-of-service") {
+                Link(destination: url) {
+                    HStack {
+                        Text("利用規約")
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+
+            if let url = URL(string: "https://iwaki-syogo.github.io/QuickMemo/eula") {
+                Link(destination: url) {
+                    HStack {
+                        Text("使用許諾契約")
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
         }
     }
