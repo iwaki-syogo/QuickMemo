@@ -6,7 +6,7 @@ struct QuickMemoApp: App {
     @State private var gitHubAccount = GitHubAccount()
     @State private var syncService = SyncService()
     @State private var storeKitService = StoreKitService()
-    @State private var showNewMemo = false
+    @State private var showNewMemo = true
 
     var body: some Scene {
         WindowGroup {

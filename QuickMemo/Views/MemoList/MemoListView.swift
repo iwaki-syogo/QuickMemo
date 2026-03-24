@@ -54,7 +54,7 @@ struct MemoListView: View {
             Text("メモがありません")
                 .font(.headline)
                 .foregroundStyle(.secondary)
-            Text("右上のボタンから新規メモを作成できます")
+            Text("右上のボタンから新しいメモを作成できます")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
