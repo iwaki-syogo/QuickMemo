@@ -1,172 +1,172 @@
-# Privacy Policy for QuickMemo
+# QuickMemo プライバシーポリシー
 
-**Effective Date:** March 24, 2026
-**Last Updated:** March 24, 2026
+**施行日:** 2026年3月24日
+**最終更新日:** 2026年3月24日
 
-iwaki-syogo ("we," "our," or "us") built QuickMemo as a freemium app. This Privacy Policy explains how we collect, use, and protect your information when you use QuickMemo.
+iwaki-syogo（以下「当方」「私たち」）は、QuickMemo をフリーミアムアプリとして開発しました。本プライバシーポリシーは、QuickMemo をご利用いただく際に、当方がどのように情報を収集・使用・保護するかについて説明するものです。
 
-By using QuickMemo, you agree to the practices described in this Privacy Policy. If you do not agree, please do not use the app.
-
----
-
-## 1. Information We Collect
-
-### Information You Provide Directly
-
-- **Memo content:** Any memos you create within QuickMemo (titles and body text) are stored locally on your device to provide the service.
-- **GitHub Personal Access Token:** If you choose to enable GitHub integration, you provide a Personal Access Token (PAT) which is stored securely in your device's Keychain. This token is used solely to sync your memos with GitHub Issues.
-- **GitHub account information:** When you connect GitHub, we retrieve your GitHub username and avatar URL to display in the app.
-
-### Information Collected Automatically
-
-- **Purchase information:** If you purchase the ad-free upgrade, Apple processes the transaction. We only receive confirmation of your purchase status to unlock the feature. We do not receive your payment details.
-
-### Information Collected by Third-Party Advertising Services
-
-- **Advertising data:** QuickMemo displays banner advertisements provided by Google AdMob. AdMob may collect device identifiers, usage data, and other information as described in [Google's Privacy Policy](https://policies.google.com/privacy). This data may be used to serve personalized or contextual ads.
-- **App Tracking Transparency:** If required by your device settings, QuickMemo will request your permission before allowing advertisers to track your activity across other apps and websites. You can change this permission at any time in your device's Settings.
-
-### Information We Do NOT Collect
-
-- We do not require account creation within QuickMemo.
-- We do not collect your email address, name, or other personal contact information through the app.
-- We do not collect location data, health data, contacts, photos, or microphone data.
-- We do not use analytics or crash reporting services.
-- We do not track you across other apps or websites (unless you grant ATT permission for advertising purposes).
+QuickMemo をご利用いただくことにより、本プライバシーポリシーに記載された取り扱いに同意したものとみなされます。同意いただけない場合は、本アプリのご利用をお控えください。
 
 ---
 
-## 2. How We Use Your Information
+## 1. 収集する情報
 
-We use the information we collect to:
+### お客様が直接提供する情報
 
-- Provide and maintain QuickMemo's core functionality (memo creation, storage, and management)
-- Sync your memos with GitHub Issues (only if you enable GitHub integration)
-- Verify your GitHub connection using your Personal Access Token
-- Unlock the ad-free experience after purchase verification
-- Display advertisements (free version only)
+- **メモの内容:** QuickMemo 内で作成されたメモ（タイトルおよび本文）は、サービスを提供するためにお客様のデバイスにローカル保存されます。
+- **GitHub Personal Access Token:** GitHub 連携を有効にされた場合、お客様が入力した Personal Access Token（PAT）はデバイスのキーチェーンに安全に保存されます。このトークンは、メモを GitHub Issues と同期するためにのみ使用されます。
+- **GitHub アカウント情報:** GitHub 連携時に、アプリ内に表示するため GitHub のユーザー名およびアバター URL を取得します。
 
-We do NOT use your information to:
+### 自動的に収集される情報
 
-- Sell your data to third parties
-- Build user profiles for non-advertising purposes
-- Make automated decisions that significantly affect you
+- **購入情報:** 広告非表示アップグレードをご購入いただいた場合、Apple が取引を処理します。当方は機能を解除するための購入状況の確認のみを受け取り、お支払いの詳細情報は受け取りません。
 
----
+### サードパーティ広告サービスにより収集される情報
 
-## 3. How We Share Your Information
+- **広告データ:** QuickMemo は Google AdMob が提供するバナー広告を表示します。AdMob は [Google のプライバシーポリシー](https://policies.google.com/privacy)に記載されたとおり、デバイス識別子、利用データ、その他の情報を収集する場合があります。このデータはパーソナライズ広告またはコンテキスト広告の配信に使用されることがあります。
+- **App Tracking Transparency:** お客様のデバイス設定で必要とされる場合、QuickMemo は広告主が他のアプリやウェブサイトにわたるアクティビティを追跡することを許可する前に、お客様の許可を求めます。この許可はデバイスの設定からいつでも変更できます。
 
-We do not sell, rent, or trade your personal information.
+### 収集しない情報
 
-We may share information in the following limited circumstances:
-
-- **GitHub (at your direction):** If you enable GitHub integration, your memo titles and body text are sent to the GitHub API to create and update Issues in your chosen repository. This is initiated by you and governed by [GitHub's Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement).
-- **Advertising partners:** AdMob may collect and process data as described in Section 4. You may opt out of personalized advertising through your device settings or ATT prompt.
-- **Legal requirements:** We may disclose information if required by law, regulation, legal process, or government request.
-- **Safety:** We may disclose information to protect the safety, rights, or property of our users or the public.
+- QuickMemo 内でのアカウント作成は不要です。
+- アプリを通じてメールアドレス、氏名、その他の個人連絡先情報は収集しません。
+- 位置情報、健康データ、連絡先、写真、マイクのデータは収集しません。
+- アナリティクスやクラッシュレポートサービスは使用していません。
+- 他のアプリやウェブサイトにわたるトラッキングは行いません（広告目的で ATT の許可を付与された場合を除く）。
 
 ---
 
-## 4. Third-Party Services
+## 2. 情報の利用目的
 
-QuickMemo uses the following third-party services:
+収集した情報は以下の目的で利用します：
 
-| Service | Purpose | Privacy Policy |
-|---------|---------|----------------|
-| GitHub API | Memo-to-Issue sync (optional, user-initiated) | [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) |
-| Google AdMob | Banner advertising (free version) | [Google Privacy Policy](https://policies.google.com/privacy) |
-| Apple StoreKit | In-App Purchase processing | [Apple Privacy Policy](https://www.apple.com/privacy/) |
+- QuickMemo の基本機能の提供および維持（メモの作成、保存、管理）
+- メモの GitHub Issues との同期（GitHub 連携を有効にした場合のみ）
+- Personal Access Token を使用した GitHub 接続の認証
+- 購入確認後の広告非表示機能の解除
+- 広告の表示（無料版のみ）
 
----
+以下の目的では情報を利用しません：
 
-## 5. Data Storage and Retention
-
-- **Memo data:** Stored locally on your device using SwiftData. Your memos are never sent to our servers. If you enable GitHub integration, memo content is also stored on GitHub's servers as Issues.
-- **GitHub Personal Access Token:** Stored in your device's Keychain (encrypted, hardware-backed storage). Deleted immediately when you disconnect GitHub integration.
-- **GitHub account information:** Stored locally in UserDefaults. Deleted when you disconnect GitHub integration.
-- **Purchase status:** Determined by Apple's StoreKit framework from your transaction history. No purchase data is stored by us.
-- **Advertising data:** Managed by AdMob according to Google's data retention policies.
-
-You can delete all local data at any time by deleting the app from your device.
+- 第三者へのデータ販売
+- 広告以外の目的でのユーザープロファイルの構築
+- お客様に重大な影響を与える自動意思決定
 
 ---
 
-## 6. Data Security
+## 3. 情報の共有
 
-We implement the following measures to protect your information:
+当方は、お客様の個人情報を販売、貸与、または取引することはありません。
 
-- **Keychain storage:** Your GitHub Personal Access Token is stored in the iOS Keychain, which provides hardware-backed encryption.
-- **HTTPS:** All network communications with GitHub's API use TLS/HTTPS encryption.
-- **Local-first architecture:** Your memos are stored locally on your device. We do not operate servers that store your data.
-- **No server-side storage:** We do not maintain any backend servers or databases containing user data.
+以下の限定的な状況において情報を共有する場合があります：
 
-No method of storage or transmission is 100% secure. We take commercially reasonable steps to protect your data, but cannot guarantee absolute security.
-
----
-
-## 7. Your Rights
-
-You have the following rights regarding your personal information:
-
-- **Access:** You can view all your data directly within the app.
-- **Deletion:** You can delete individual memos within the app, or delete all data by removing the app from your device.
-- **Disconnect GitHub:** You can disconnect GitHub integration at any time in Settings, which deletes your stored token and account information.
-- **Opt out of personalized ads:** You can limit ad tracking through iOS Settings > Privacy & Security > Tracking.
-- **Withdraw consent:** You can withdraw consent for data processing at any time by discontinuing use of the app.
-
-To exercise any additional rights, contact us at iwk.syogo@gmail.com. We will respond within 30 days.
-
-### For European Union Residents (GDPR)
-
-If you are located in the European Economic Area (EEA), you have additional rights under the General Data Protection Regulation (GDPR):
-
-- **Data controller:** iwaki-syogo, iwk.syogo@gmail.com
-- **Lawful basis for processing:**
-  - Your consent (GitHub integration, advertising tracking)
-  - Performance of a contract (providing the memo service you requested)
-  - Legitimate interests (maintaining app security)
-- **Data subject rights:** In addition to the rights above, you have the right to:
-  - Restrict processing of your data
-  - Object to processing based on legitimate interests
-  - Request data portability
-  - Lodge a complaint with your local Data Protection Authority
-- **Data transfers:** When you use GitHub integration, your data is transferred to GitHub's servers (United States). GitHub maintains appropriate safeguards for international data transfers.
-
-### For California Residents (CCPA)
-
-If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):
-
-- **Right to know:** You may request the categories and specific pieces of personal information we have collected about you.
-- **Right to delete:** You may request deletion of your personal information.
-- **Right to opt-out:** We do not sell your personal information. AdMob may collect data for advertising purposes; you can opt out via iOS tracking settings.
-- **Non-discrimination:** We will not discriminate against you for exercising your CCPA rights.
-
-To exercise your CCPA rights, contact us at iwk.syogo@gmail.com.
+- **GitHub（お客様の指示による）：** GitHub 連携を有効にした場合、メモのタイトルおよび本文が GitHub API に送信され、選択したリポジトリで Issues として作成・更新されます。これはお客様の指示により開始され、[GitHub のプライバシーステートメント](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)に準拠します。
+- **広告パートナー：** AdMob は第4条に記載されたとおり、データを収集・処理する場合があります。デバイスの設定または ATT プロンプトを通じてパーソナライズ広告をオプトアウトできます。
+- **法的要件：** 法律、規制、法的手続き、または政府の要請により必要な場合、情報を開示することがあります。
+- **安全確保：** ユーザーまたは公衆の安全、権利、または財産を保護するために情報を開示することがあります。
 
 ---
 
-## 8. Children's Privacy
+## 4. サードパーティサービス
 
-QuickMemo is not intended for children under 13. We do not knowingly collect personal information from children under 13. If we discover that we have collected data from a child under 13, we will delete it promptly. If you believe a child has provided us with personal information, please contact us at iwk.syogo@gmail.com.
+QuickMemo は以下のサードパーティサービスを使用しています：
 
----
-
-## 9. Changes to This Privacy Policy
-
-We may update this Privacy Policy from time to time. When we make significant changes, we will:
-
-- Update the "Last Updated" date at the top of this document
-- Notify you through the app (for significant changes)
-- Post the updated policy at https://iwaki-syogo.github.io/QuickMemo/privacy-policy
-
-Your continued use of QuickMemo after changes are posted constitutes acceptance of the updated Privacy Policy.
+| サービス | 目的 | プライバシーポリシー |
+|---------|------|---------------------|
+| GitHub API | メモと Issues の同期（任意、ユーザー操作） | [GitHub プライバシーステートメント](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) |
+| Google AdMob | バナー広告（無料版） | [Google プライバシーポリシー](https://policies.google.com/privacy) |
+| Apple StoreKit | アプリ内課金の処理 | [Apple プライバシーポリシー](https://www.apple.com/privacy/) |
 
 ---
 
-## 10. Contact Us
+## 5. データの保存と保持
 
-If you have questions or concerns about this Privacy Policy or our data practices, contact us at:
+- **メモデータ：** SwiftData を使用してお客様のデバイスにローカル保存されます。メモが当方のサーバーに送信されることはありません。GitHub 連携を有効にした場合、メモの内容は GitHub のサーバーにも Issues として保存されます。
+- **GitHub Personal Access Token：** デバイスのキーチェーン（暗号化されたハードウェアベースのストレージ）に保存されます。GitHub 連携を解除すると即座に削除されます。
+- **GitHub アカウント情報：** UserDefaults にローカル保存されます。GitHub 連携を解除すると削除されます。
+- **購入状況：** Apple の StoreKit フレームワークにより、お客様の取引履歴から判定されます。購入データは当方では保存しません。
+- **広告データ：** Google のデータ保持ポリシーに従い、AdMob によって管理されます。
 
-- **Email:** iwk.syogo@gmail.com
-- **Developer:** iwaki-syogo
+デバイスからアプリを削除することで、すべてのローカルデータをいつでも削除できます。
+
+---
+
+## 6. データのセキュリティ
+
+お客様の情報を保護するために、以下の措置を実施しています：
+
+- **キーチェーンストレージ：** GitHub Personal Access Token は、ハードウェアベースの暗号化を提供する iOS キーチェーンに保存されます。
+- **HTTPS：** GitHub API とのすべてのネットワーク通信は TLS/HTTPS 暗号化を使用します。
+- **ローカルファーストアーキテクチャ：** メモはお客様のデバイスにローカル保存されます。お客様のデータを保存するサーバーは運用していません。
+- **サーバーサイドストレージなし：** ユーザーデータを含むバックエンドサーバーやデータベースは保持していません。
+
+保存や送信の方法に100%安全なものはありません。当方は商業的に合理的な対策を講じてお客様のデータを保護していますが、絶対的なセキュリティを保証することはできません。
+
+---
+
+## 7. お客様の権利
+
+お客様は、ご自身の個人情報に関して以下の権利を有します：
+
+- **アクセス：** アプリ内で直接すべてのデータを閲覧できます。
+- **削除：** アプリ内で個々のメモを削除できます。また、デバイスからアプリを削除することですべてのデータを削除できます。
+- **GitHub 連携の解除：** 設定からいつでも GitHub 連携を解除でき、保存されているトークンおよびアカウント情報が削除されます。
+- **パーソナライズ広告のオプトアウト：** iOS の設定 > プライバシーとセキュリティ > トラッキングから広告のトラッキングを制限できます。
+- **同意の撤回：** アプリの使用を中止することで、いつでもデータ処理への同意を撤回できます。
+
+その他の権利行使については、iwk.syogo@gmail.com までご連絡ください。30日以内に回答いたします。
+
+### EU 居住者の方へ（EU一般データ保護規則（GDPR））
+
+欧州経済領域（EEA）にお住まいの方は、EU一般データ保護規則（GDPR）に基づき、以下の追加的権利を有します：
+
+- **データ管理者：** iwaki-syogo、iwk.syogo@gmail.com
+- **処理の法的根拠：**
+  - お客様の同意（GitHub 連携、広告トラッキング）
+  - 契約の履行（お客様が要求したメモサービスの提供）
+  - 正当な利益（アプリのセキュリティ維持）
+- **データ主体の権利：** 上記の権利に加えて、以下の権利を有します：
+  - データ処理の制限を求める権利
+  - 正当な利益に基づく処理に異議を唱える権利
+  - データポータビリティを要求する権利
+  - 管轄のデータ保護機関に苦情を申し立てる権利
+- **データ移転：** GitHub 連携をご利用の場合、お客様のデータは GitHub のサーバー（アメリカ合衆国）に転送されます。GitHub は国際データ転送に適切な保護措置を維持しています。
+
+### カリフォルニア州居住者の方へ（カリフォルニア州消費者プライバシー法（CCPA））
+
+カリフォルニア州にお住まいの方は、カリフォルニア州消費者プライバシー法（CCPA）に基づき、以下の追加的権利を有します：
+
+- **知る権利：** 当方がお客様について収集した個人情報のカテゴリーおよび具体的な情報の開示を要求できます。
+- **削除する権利：** お客様の個人情報の削除を要求できます。
+- **オプトアウトする権利：** 当方はお客様の個人情報を販売しません。AdMob は広告目的でデータを収集する場合がありますが、iOS のトラッキング設定からオプトアウトできます。
+- **差別されない権利：** CCPA に基づく権利を行使したことによる差別的な取り扱いは行いません。
+
+CCPA に基づく権利の行使については、iwk.syogo@gmail.com までご連絡ください。
+
+---
+
+## 8. 児童のプライバシー
+
+QuickMemo は13歳未満の児童を対象としたものではありません。13歳未満の児童から故意に個人情報を収集することはありません。13歳未満の児童からデータを収集したことが判明した場合、速やかに削除いたします。児童が当方に個人情報を提供したと思われる場合は、iwk.syogo@gmail.com までご連絡ください。
+
+---
+
+## 9. プライバシーポリシーの変更
+
+本プライバシーポリシーは随時更新される場合があります。重要な変更を行う場合は以下の対応を行います：
+
+- 本文書冒頭の「最終更新日」を更新
+- 重要な変更についてはアプリを通じて通知
+- 更新されたポリシーを https://iwaki-syogo.github.io/QuickMemo/privacy-policy に掲載
+
+変更の掲載後に QuickMemo の利用を継続することにより、更新されたプライバシーポリシーに同意したものとみなされます。
+
+---
+
+## 10. お問い合わせ
+
+本プライバシーポリシーまたは当方のデータの取り扱いについてご質問・ご懸念がある場合は、以下までご連絡ください：
+
+- **メール:** iwk.syogo@gmail.com
+- **開発者:** iwaki-syogo
 - **GitHub:** https://github.com/iwaki-syogo/QuickMemo

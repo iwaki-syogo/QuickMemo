@@ -131,7 +131,7 @@ struct MemoDetailView: View {
                 HStack(spacing: 4) {
                     Image(systemName: viewModel.status == .open ? "circle.fill" : "checkmark.circle.fill")
                         .font(.caption)
-                    Text(viewModel.status == .open ? "Open" : "Closed")
+                    Text(viewModel.status == .open ? "オープン" : "クローズ")
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }

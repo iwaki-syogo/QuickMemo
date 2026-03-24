@@ -1,94 +1,94 @@
-# End-User License Agreement (EULA) for QuickMemo
+# QuickMemo エンドユーザー使用許諾契約（EULA）
 
-**Effective Date:** March 24, 2026
+**施行日:** 2026年3月24日
 
-This End-User License Agreement ("EULA") is a legal agreement between you ("User") and iwaki-syogo ("Licensor") for the use of QuickMemo ("the App").
+本エンドユーザー使用許諾契約（以下「本契約」）は、お客様（以下「ユーザー」）と iwaki-syogo（以下「ライセンサー」）との間で、QuickMemo（以下「本アプリ」）の使用について締結される法的合意です。
 
-By installing or using QuickMemo, you agree to be bound by this EULA. If you do not agree, do not install or use the App.
+QuickMemo をインストールまたは使用することにより、お客様は本契約に拘束されることに同意したものとみなされます。同意いただけない場合は、本アプリをインストールまたは使用しないでください。
 
-This EULA supplements the Apple Licensed Application End User License Agreement (the "Standard EULA") available at [https://www.apple.com/legal/internet-services/itunes/dev/stdeula/](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/). In the event of a conflict between this EULA and the Standard EULA, this EULA shall govern.
-
----
-
-## 1. License Grant
-
-Subject to your compliance with this EULA, iwaki-syogo grants you a limited, non-exclusive, non-transferable, revocable license to download, install, and use QuickMemo on Apple-branded devices that you own or control, as permitted by the Apple Media Services Terms and Conditions.
+本契約は、Apple のライセンスアプリケーションエンドユーザー使用許諾契約（以下「標準 EULA」、[https://www.apple.com/legal/internet-services/itunes/dev/stdeula/](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) で閲覧可能）を補足するものです。本契約と標準 EULA の間に矛盾がある場合は、本契約が優先します。
 
 ---
 
-## 2. Restrictions
+## 1. ライセンスの付与
 
-You may NOT:
-
-- Copy, modify, or create derivative works of the App
-- Reverse-engineer, decompile, disassemble, or attempt to derive the source code of the App
-- Rent, lease, lend, sell, redistribute, or sublicense the App
-- Remove, alter, or obscure any copyright, trademark, or proprietary notices
-- Use the App for any illegal or unauthorized purpose
-- Use the App to develop a competing product or service
+本契約の遵守を条件として、iwaki-syogo は、Apple Media Services の利用規約により許可される範囲で、お客様が所有または管理する Apple ブランドのデバイスに QuickMemo をダウンロード、インストール、および使用するための、限定的、非独占的、譲渡不可、取消可能なライセンスを付与します。
 
 ---
 
-## 3. Intellectual Property
+## 2. 制限事項
 
-The App, including all content, features, functionality, design, code, and documentation, is and remains the exclusive property of iwaki-syogo. This EULA does not grant you any ownership rights in the App.
+お客様は以下の行為を行ってはなりません：
 
-All feedback, suggestions, or ideas you provide about the App may be used by iwaki-syogo without obligation to you.
-
----
-
-## 4. Updates and Modifications
-
-iwaki-syogo may release updates, patches, or new versions of the App. Updates may be required for continued use. We are not obligated to provide updates, maintenance, or support, though we intend to continue improving the App.
-
----
-
-## 5. Third-Party Services
-
-QuickMemo optionally integrates with GitHub via your Personal Access Token. Your use of GitHub is subject to GitHub's own terms and policies. iwaki-syogo is not responsible for the availability, accuracy, or security of third-party services.
-
-QuickMemo displays advertisements via Google AdMob in the free version. Your interaction with advertisements is subject to the advertiser's terms and privacy policies.
+- 本アプリの複製、変更、または二次的著作物の作成
+- 本アプリのリバースエンジニアリング、逆コンパイル、逆アセンブル、またはソースコードの解読の試み
+- 本アプリの賃貸、リース、貸与、販売、再配布、またはサブライセンス
+- 著作権、商標、その他の所有権表示の削除、改変、または隠蔽
+- 違法または未許可の目的での本アプリの使用
+- 本アプリを使用した競合製品またはサービスの開発
 
 ---
 
-## 6. Termination
+## 3. 知的財産
 
-This EULA is effective until terminated. It terminates automatically if you fail to comply with any term. Upon termination:
+本アプリのすべてのコンテンツ、機能、デザイン、コード、およびドキュメントを含む本アプリは、iwaki-syogo の独占的財産であり、今後も同様です。本契約は、本アプリに関するいかなる所有権もお客様に付与するものではありません。
 
-- You must cease all use of the App
-- You must delete all copies of the App from your devices
-- Sections that by their nature should survive will remain in effect
-
-You may terminate this EULA at any time by deleting the App from your devices.
+本アプリに関してお客様が提供するすべてのフィードバック、提案、またはアイデアは、お客様に対する義務なく iwaki-syogo が使用できるものとします。
 
 ---
 
-## 7. No Warranty
+## 4. アップデートおよび変更
 
-THE APP IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. IWAKI-SYOGO DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
-
-IWAKI-SYOGO DOES NOT WARRANT THAT THE APP WILL BE ERROR-FREE, UNINTERRUPTED, OR FREE OF HARMFUL COMPONENTS.
+iwaki-syogo は、本アプリのアップデート、パッチ、または新バージョンをリリースする場合があります。継続使用にはアップデートが必要になる場合があります。当方はアップデート、メンテナンス、またはサポートを提供する義務を負いませんが、引き続き本アプリの改善に努めます。
 
 ---
 
-## 8. Limitation of Liability
+## 5. サードパーティサービス
 
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL IWAKI-SYOGO BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF THE APP.
+QuickMemo は、お客様の Personal Access Token を使用して GitHub と任意で連携します。GitHub の利用は、GitHub 独自の規約およびポリシーに準拠します。iwaki-syogo は、サードパーティサービスの可用性、正確性、またはセキュリティについて責任を負いません。
 
-IWAKI-SYOGO'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY YOU FOR THE APP IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY, OR FIFTY DOLLARS ($50 USD), WHICHEVER IS GREATER.
-
----
-
-## 9. Governing Law
-
-This EULA is governed by the laws of Japan. Any disputes will be resolved in the courts of Japan.
+QuickMemo の無料版は、Google AdMob を通じて広告を表示します。広告とのやり取りは、広告主の規約およびプライバシーポリシーに準拠します。
 
 ---
 
-## 10. Contact
+## 6. 契約の終了
 
-For questions about this EULA, contact:
+本契約は、終了するまで有効です。お客様がいずれかの条項に違反した場合、本契約は自動的に終了します。終了時：
 
-- **Email:** iwk.syogo@gmail.com
-- **Developer:** iwaki-syogo
+- お客様は本アプリのすべての使用を中止しなければなりません
+- お客様のデバイスから本アプリのすべてのコピーを削除しなければなりません
+- 性質上存続すべき条項は引き続き有効です
+
+お客様は、デバイスから本アプリを削除することにより、いつでも本契約を終了できます。
+
+---
+
+## 7. 保証の免責
+
+本アプリは、商品性、特定目的への適合性、および権利非侵害の保証を含むがこれに限定されない、明示的または暗示的な一切の保証なしに、「現状のまま」提供されます。
+
+iwaki-syogo は、本アプリがエラーなく、中断なく、または有害なコンポーネントを含まずに動作することを保証しません。
+
+---
+
+## 8. 責任の制限
+
+適用法により許可される最大限度において、iwaki-syogo は、本アプリの使用に起因または関連して生じる間接的、偶発的、特別、結果的、または懲罰的損害について、いかなる場合も責任を負いません。
+
+iwaki-syogo の累計責任額は、責任が発生する事象に先立つ12ヶ月間にお客様が本アプリに対して支払った金額、または50米ドルのいずれか大きい方を上限とします。
+
+---
+
+## 9. 準拠法
+
+本契約は日本法に準拠するものとします。紛争は日本の裁判所において解決されるものとします。
+
+---
+
+## 10. お問い合わせ
+
+本契約についてご質問がある場合は、以下までご連絡ください：
+
+- **メール:** iwk.syogo@gmail.com
+- **開発者:** iwaki-syogo
 - **GitHub:** https://github.com/iwaki-syogo/QuickMemo

@@ -20,7 +20,7 @@ struct MemoListView: View {
             }
             AdBannerView()
         }
-        .navigationTitle("QuickMemo")
+        .navigationTitle("メモ")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
@@ -73,7 +73,7 @@ struct MemoListView: View {
 
             if gitHubAccount.isLinked {
                 if !viewModel.openMemos.isEmpty {
-                    Section("Open") {
+                    Section("オープン") {
                         ForEach(viewModel.openMemos, id: \.id) { memo in
                             memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
@@ -81,7 +81,7 @@ struct MemoListView: View {
                 }
 
                 if !viewModel.closedMemos.isEmpty {
-                    Section("Closed") {
+                    Section("クローズ") {
                         ForEach(viewModel.closedMemos, id: \.id) { memo in
                             memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
@@ -135,7 +135,7 @@ struct MemoListView: View {
                 Button {
                     labelPickerMemo = memo
                 } label: {
-                    SwiftUI.Label("Label", systemImage: "tag")
+                    SwiftUI.Label("ラベル", systemImage: "tag")
                 }
                 .tint(.purple)
             }
@@ -156,7 +156,7 @@ struct MemoListView: View {
                         viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
                 } label: {
-                    SwiftUI.Label("Close", systemImage: "checkmark.circle")
+                    SwiftUI.Label("クローズ", systemImage: "checkmark.circle")
                 }
                 .tint(.green)
             } else {
@@ -167,7 +167,7 @@ struct MemoListView: View {
                         viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
                 } label: {
-                    SwiftUI.Label("Reopen", systemImage: "arrow.uturn.left")
+                    SwiftUI.Label("再開", systemImage: "arrow.uturn.left")
                 }
                 .tint(.blue)
             }

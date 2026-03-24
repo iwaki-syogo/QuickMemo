@@ -30,7 +30,7 @@ struct QuickMemoWidgetEntryView: View {
                 .font(.system(size: 32, weight: .medium))
                 .foregroundStyle(Color(red: 0.2, green: 0.7, blue: 0.4))
 
-            Text("New Memo")
+            Text("新規メモ")
                 .font(.system(.callout, weight: .semibold))
                 .foregroundStyle(.primary)
         }
@@ -50,7 +50,7 @@ struct QuickMemoWidget: Widget {
             QuickMemoWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("QuickMemo")
-        .description("Tap to create a new memo.")
+        .description("タップして新規メモを作成")
         .supportedFamilies([.systemSmall])
     }
 }
