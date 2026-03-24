@@ -55,7 +55,9 @@ struct GitHubAPIClient {
             throw APIError.unauthorized
         }
 
-        let url = URL(string: "\(baseURL)\(path)")!
+        guard let url = URL(string: "\(baseURL)\(path)") else {
+            throw APIError.invalidResponse
+        }
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

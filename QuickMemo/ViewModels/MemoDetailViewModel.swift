@@ -44,7 +44,11 @@ class MemoDetailViewModel {
 
         if changed {
             memo.updatedAt = Date()
-            try? modelContext?.save()
+            do {
+                try modelContext?.save()
+            } catch {
+                print("[QuickMemo] Failed to save memo detail: \(error)")
+            }
         }
     }
 

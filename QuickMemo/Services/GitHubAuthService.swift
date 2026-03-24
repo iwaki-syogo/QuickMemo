@@ -1,12 +1,33 @@
 import Foundation
 import AuthenticationServices
 
+// MARK: - GitHubAuthConfig
+
+/// Configuration for GitHub OAuth credentials.
+/// Values are loaded from Info.plist (GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET).
+/// In production, token exchange should be performed via a server-side proxy
+/// to avoid bundling client_secret in the app binary.
+struct GitHubAuthConfig {
+    let clientID: String
+    let clientSecret: String
+
+    static let `default`: GitHubAuthConfig = {
+        let clientID = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_ID") as? String ?? ""
+        let clientSecret = Bundle.main.object(forInfoDictionaryKey: "GITHUB_CLIENT_SECRET") as? String ?? ""
+        return GitHubAuthConfig(clientID: clientID, clientSecret: clientSecret)
+    }()
+}
+
 @Observable
 class GitHubAuthService: NSObject {
-    private static let clientID = "YOUR_GITHUB_CLIENT_ID"
-    private static let clientSecret = "YOUR_GITHUB_CLIENT_SECRET"
+    private let config: GitHubAuthConfig
     private static let callbackScheme = "quickmemo"
     private static let scope = "repo"
+
+    init(config: GitHubAuthConfig = .default) {
+        self.config = config
+        super.init()
+    }
 
     var isAuthenticating = false
 
@@ -59,7 +80,7 @@ class GitHubAuthService: NSObject {
     private func buildAuthorizeURL() -> URL {
         var components = URLComponents(string: "https://github.com/login/oauth/authorize")!
         components.queryItems = [
-            URLQueryItem(name: "client_id", value: Self.clientID),
+            URLQueryItem(name: "client_id", value: config.clientID),
             URLQueryItem(name: "scope", value: Self.scope),
             URLQueryItem(name: "redirect_uri", value: "\(Self.callbackScheme)://github/callback")
         ]
@@ -74,8 +95,8 @@ class GitHubAuthService: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
         let body: [String: String] = [
-            "client_id": Self.clientID,
-            "client_secret": Self.clientSecret,
+            "client_id": config.clientID,
+            "client_secret": config.clientSecret,
             "code": code
         ]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)

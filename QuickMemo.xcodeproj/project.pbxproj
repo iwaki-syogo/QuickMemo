@@ -77,6 +77,7 @@
 		3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		43F625160ECC11343FFB27A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GitHub.xcconfig; sourceTree = "<group>"; };
 		613BBD69092FBFF45F02BCEC /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
 		61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickMemoWidget.swift; sourceTree = "<group>"; };
 		6D16F0056F2CAC69CA88FB22 /* QuickMemoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = QuickMemoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				AF1B0283E67D611BCC74D5AC /* QuickMemo */,
+				3F5AC7292C56112BCA1B7170 /* QuickMemo */,
 				E448FE9D63347D2243403494 /* QuickMemoWidget */,
 				6ABA4996813D4CE3144B5BCD /* Products */,
 			);
@@ -116,6 +118,15 @@
 				37BC9B9B3C2A8E6D92E29926 /* QuickMemoApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		3F5AC7292C56112BCA1B7170 /* QuickMemo */ = {
+			isa = PBXGroup;
+			children = (
+				6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */,
+			);
+			name = QuickMemo;
+			path = .;
 			sourceTree = "<group>";
 		};
 		40ECB2FC5F95FD0C25E34AFC /* Settings */ = {
@@ -411,6 +422,7 @@
 /* Begin XCBuildConfiguration section */
 		0CC0B2F86075D4B4B37C9956 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -536,6 +548,7 @@
 		};
 		A8EABA4CA4626B0D318E9DFF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

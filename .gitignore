@@ -32,5 +32,8 @@ Pods/
 *.swp
 *~
 
+# GitHub OAuth config (contains secrets)
+GitHub.xcconfig
+
 # Orchestra
 .orchestra/

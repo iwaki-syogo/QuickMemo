@@ -100,6 +100,8 @@ struct MemoListView: View {
         .listStyle(.insetGrouped)
     }
 
+    @State private var labelPickerMemo: Memo?
+
     private func memoNavigationLink(memo: Memo, pinAction: String, pinIcon: String) -> some View {
         NavigationLink {
             MemoDetailView(memo: memo)
@@ -122,6 +124,15 @@ struct MemoListView: View {
                 SwiftUI.Label(pinAction, systemImage: pinIcon)
             }
             .tint(.orange)
+
+            if gitHubAccount.isLinked {
+                Button {
+                    labelPickerMemo = memo
+                } label: {
+                    SwiftUI.Label("Label", systemImage: "tag")
+                }
+                .tint(.purple)
+            }
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(role: .destructive) {
@@ -131,14 +142,44 @@ struct MemoListView: View {
                 SwiftUI.Label("削除", systemImage: "trash")
             }
 
-            if gitHubAccount.isLinked, memo.githubIssueURL != nil {
+            if memo.status == .open {
+                Button {
+                    viewModel.toggleStatus(memo)
+                    Task {
+                        await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                    }
+                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                } label: {
+                    SwiftUI.Label("Close", systemImage: "checkmark.circle")
+                }
+                .tint(.green)
+            } else {
+                Button {
+                    viewModel.toggleStatus(memo)
+                    Task {
+                        await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                    }
+                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                } label: {
+                    SwiftUI.Label("Reopen", systemImage: "arrow.uturn.left")
+                }
+                .tint(.blue)
+            }
+
+            if memo.githubIssueURL != nil {
                 Button {
                     openInGitHub(memo)
                 } label: {
-                    SwiftUI.Label("GitHubで開く", systemImage: "arrow.up.right")
+                    SwiftUI.Label("GitHub", systemImage: "safari")
                 }
-                .tint(.purple)
+                .tint(.gray)
             }
+        }
+        .sheet(item: $labelPickerMemo) { memo in
+            LabelPickerSheet(selectedLabelIDs: Binding(
+                get: { memo.labelIDs },
+                set: { memo.labelIDs = $0 }
+            ))
         }
     }
 

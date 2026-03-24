@@ -25,7 +25,11 @@ class InputViewModel {
             body: body.isEmpty ? nil : body
         )
         modelContext.insert(memo)
-        try? modelContext.save()
+        do {
+            try modelContext.save()
+        } catch {
+            print("[QuickMemo] Failed to save new memo: \(error)")
+        }
         savedMemo = memo
         hasSaved = true
     }

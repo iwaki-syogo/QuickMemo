@@ -2,6 +2,7 @@ import Foundation
 import SwiftData
 import Observation
 
+@MainActor
 @Observable
 class SyncService {
     private let apiClient = GitHubAPIClient()
@@ -14,7 +15,7 @@ class SyncService {
         let repo = account.repositoryName
 
         memo.syncStatus = .pending
-        try? context.save()
+        do { try context.save() } catch { print("[QuickMemo] Failed to save pending status: \(error)") }
 
         do {
             let labelNames = fetchLabelNames(for: memo, context: context)
@@ -54,11 +55,11 @@ class SyncService {
             memo.syncStatus = .synced
             memo.syncError = nil
             memo.lastSyncedAt = Date()
-            try? context.save()
+            do { try context.save() } catch { print("[QuickMemo] Failed to save synced status: \(error)") }
         } catch {
             memo.syncStatus = .failed
             memo.syncError = error.localizedDescription
-            try? context.save()
+            do { try context.save() } catch { print("[QuickMemo] Failed to save failed status: \(error)") }
         }
     }
 
