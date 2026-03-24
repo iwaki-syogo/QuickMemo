@@ -1,5 +1,6 @@
 import StoreKit
 
+@MainActor
 @Observable
 final class StoreKitService {
     private(set) var isAdFree = false
@@ -7,9 +8,10 @@ final class StoreKitService {
     private(set) var isPurchasing = false
     private(set) var errorMessage: String?
 
-    private static let adFreeProductID = "com.iwakisyogo.QuickMemo.adfree"
+    nonisolated static let adFreeProductID = "com.iwakisyogo.QuickMemo.adfree"
 
-    private var transactionListener: Task<Void, Never>?
+    @ObservationIgnored
+    private nonisolated(unsafe) var transactionListener: Task<Void, Never>?
 
     init() {
         transactionListener = listenForTransactions()
@@ -77,13 +79,15 @@ final class StoreKitService {
         }
     }
 
-    private func listenForTransactions() -> Task<Void, Never> {
+    private nonisolated func listenForTransactions() -> Task<Void, Never> {
         Task.detached { [weak self] in
             for await result in Transaction.updates {
                 guard case .verified(let transaction) = result else { continue }
-                if transaction.productID == Self.adFreeProductID {
-                    await MainActor.run {
-                        self?.isAdFree = true
+                if transaction.productID == StoreKitService.adFreeProductID {
+                    if let strongSelf = self {
+                        await MainActor.run {
+                            strongSelf.isAdFree = true
+                        }
                     }
                     await transaction.finish()
                 }

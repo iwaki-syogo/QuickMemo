@@ -98,6 +98,12 @@ struct MemoListView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .sheet(item: $labelPickerMemo) { memo in
+            LabelPickerSheet(selectedLabelIDs: Binding(
+                get: { memo.labelIDs },
+                set: { memo.labelIDs = $0 }
+            ))
+        }
     }
 
     @State private var labelPickerMemo: Memo?
@@ -147,8 +153,8 @@ struct MemoListView: View {
                     viewModel.toggleStatus(memo)
                     Task {
                         await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                        viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
-                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                 } label: {
                     SwiftUI.Label("Close", systemImage: "checkmark.circle")
                 }
@@ -158,8 +164,8 @@ struct MemoListView: View {
                     viewModel.toggleStatus(memo)
                     Task {
                         await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                        viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
-                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                 } label: {
                     SwiftUI.Label("Reopen", systemImage: "arrow.uturn.left")
                 }
@@ -174,12 +180,6 @@ struct MemoListView: View {
                 }
                 .tint(.gray)
             }
-        }
-        .sheet(item: $labelPickerMemo) { memo in
-            LabelPickerSheet(selectedLabelIDs: Binding(
-                get: { memo.labelIDs },
-                set: { memo.labelIDs = $0 }
-            ))
         }
     }
 

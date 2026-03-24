@@ -1,11 +1,14 @@
 import Foundation
 
+@MainActor
 @Observable
 class GitHubAuthService {
 
     func login(token: String) async throws {
         // Validate the token by calling GET /user
-        let url = URL(string: "https://api.github.com/user")!
+        guard let url = URL(string: "https://api.github.com/user") else {
+            throw AuthError.invalidToken
+        }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
