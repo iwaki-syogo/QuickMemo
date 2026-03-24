@@ -45,12 +45,16 @@ targets:
     platform: iOS
     sources:
       - QuickMemoWidget
+    info:
+      path: QuickMemoWidget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo.Widget
         INFOPLIST_KEY_CFBundleDisplayName: QuickMemo Widget
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
-        GENERATE_INFOPLIST_FILE: YES
         CURRENT_PROJECT_VERSION: 1
         MARKETING_VERSION: 1.0.0
         SKIP_INSTALL: YES
