@@ -1,0 +1,31 @@
+{
+  "identifier" : "QuickMemo",
+  "type" : "com.apple.product-type.storekit",
+  "version" : 1,
+  "products" : [
+    {
+      "displayPrice" : "480",
+      "familyShareable" : false,
+      "internalID" : "1",
+      "localizations" : [
+        {
+          "description" : "すべての広告を非表示にします",
+          "displayName" : "広告非表示",
+          "locale" : "ja"
+        },
+        {
+          "description" : "Remove all ads from the app",
+          "displayName" : "Remove Ads",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "com.iwakisyogo.QuickMemo.adfree",
+      "referenceName" : "Ad Free",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1",
+    "_developerTeamID" : "9SVPJ6X69X"
+  }
+}
