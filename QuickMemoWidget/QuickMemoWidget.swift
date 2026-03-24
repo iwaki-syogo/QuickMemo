@@ -49,7 +49,7 @@ struct QuickMemoWidget: Widget {
         StaticConfiguration(kind: kind, provider: QuickMemoProvider()) { entry in
             QuickMemoWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("GitMemo")
+        .configurationDisplayName("Issuepad")
         .description("タップして新規メモを作成")
         .supportedFamilies([.systemSmall])
     }

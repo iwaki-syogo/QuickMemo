@@ -1,7 +1,7 @@
-# GitMemo
+# Issuepad
 
 ## Overview
-GitMemo is a fast, lightweight memo app for iOS with GitHub sync and widget support.
+Issuepad is a fast, lightweight memo app for iOS with GitHub sync and widget support.
 
 ## Tech Stack
 - **UI**: SwiftUI
