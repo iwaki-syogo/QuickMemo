@@ -25,6 +25,7 @@
 		83C334EA1E61B654F94CD1AD /* QuickMemoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */; };
 		8AA8C1E0052D6C5EE0859655 /* MemoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE7C4EC3F7376C9B93D5C4 /* MemoRowView.swift */; };
 		9A35CAE3EAB0AA0D160600DA /* RepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37577AD14F9052C90F3AE2F6 /* RepositoryPickerView.swift */; };
+		9AB9D72F55FA292D52C6C910 /* QuickMemo.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */; };
 		9F17AC3903F5AD305571F906 /* project_widget.yml in Resources */ = {isa = PBXBuildFile; fileRef = 253F84F8BF88A90A7224F334 /* project_widget.yml */; };
 		A9C72CC711589E85DB988E70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF7D4EB6912842BB1981A0 /* ContentView.swift */; };
 		C47E0706227FD2506ECA7B4D /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */; };
@@ -77,11 +78,12 @@
 		3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		43F625160ECC11343FFB27A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GitHub.xcconfig; sourceTree = "<group>"; };
 		613BBD69092FBFF45F02BCEC /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
 		61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickMemoWidget.swift; sourceTree = "<group>"; };
 		6D16F0056F2CAC69CA88FB22 /* QuickMemoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = QuickMemoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0917CE0C01D6B8D4D44DDF /* QuickMemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QuickMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D6AC7B866626AD26839642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */ = {isa = PBXFileReference; path = QuickMemo.storekit; sourceTree = "<group>"; };
 		8F9423803E9E638A864F33DF /* GitHubAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAccount.swift; sourceTree = "<group>"; };
 		8FB576F5EBC47DF5A29F7240 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		91E203CF13D5F1400AD0309F /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				AF1B0283E67D611BCC74D5AC /* QuickMemo */,
-				3F5AC7292C56112BCA1B7170 /* QuickMemo */,
 				E448FE9D63347D2243403494 /* QuickMemoWidget */,
 				6ABA4996813D4CE3144B5BCD /* Products */,
 			);
@@ -118,15 +119,6 @@
 				37BC9B9B3C2A8E6D92E29926 /* QuickMemoApp.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		3F5AC7292C56112BCA1B7170 /* QuickMemo */ = {
-			isa = PBXGroup;
-			children = (
-				6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */,
-			);
-			name = QuickMemo;
-			path = .;
 			sourceTree = "<group>";
 		};
 		40ECB2FC5F95FD0C25E34AFC /* Settings */ = {
@@ -186,6 +178,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		A7CA5E83A665F3EB95F2A0C9 /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */,
+			);
+			path = StoreKit;
+			sourceTree = "<group>";
+		};
 		AB3DE704A55A04A27A3E0D8D /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +202,7 @@
 				84B62CC17183DA1F9513F084 /* Models */,
 				C90C1299A80B6E7C4FA9A678 /* Resources */,
 				F2B7292BF736A4684776BF8E /* Services */,
+				A7CA5E83A665F3EB95F2A0C9 /* StoreKit */,
 				EB3779941360AC7536A5260A /* Utilities */,
 				542C21F338778BADB14A0105 /* ViewModels */,
 				B90B907D2C99192EE42051B7 /* Views */,
@@ -241,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				43F625160ECC11343FFB27A7 /* Assets.xcassets */,
+				75D6AC7B866626AD26839642 /* Info.plist */,
 				253F84F8BF88A90A7224F334 /* project_widget.yml */,
 				1EE3E117B23474B8AEE4D282 /* QuickMemoWidget.entitlements */,
 				61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */,
@@ -363,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C82FAF5B729242640E8DF870 /* Assets.xcassets in Resources */,
+				9AB9D72F55FA292D52C6C910 /* QuickMemo.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +425,6 @@
 /* Begin XCBuildConfiguration section */
 		0CC0B2F86075D4B4B37C9956 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -494,7 +496,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "QuickMemo Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../../Frameworks";
@@ -534,7 +536,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "QuickMemo Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../../Frameworks";
@@ -548,7 +550,6 @@
 		};
 		A8EABA4CA4626B0D318E9DFF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6133CC87ABDD484AA8F1BE7F /* GitHub.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

@@ -27,9 +27,5 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>GITHUB_CLIENT_ID</key>
-	<string>$(GITHUB_CLIENT_ID)</string>
-	<key>GITHUB_CLIENT_SECRET</key>
-	<string>$(GITHUB_CLIENT_SECRET)</string>
 </dict>
 </plist>

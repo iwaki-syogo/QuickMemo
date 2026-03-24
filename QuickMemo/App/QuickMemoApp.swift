@@ -20,7 +20,6 @@ struct QuickMemoApp: App {
                     case .newMemo:
                         showNewMemo = true
                     case .githubCallback:
-                        // GitHub OAuth callback is handled by ASWebAuthenticationSession
                         break
                     case .unknown:
                         break

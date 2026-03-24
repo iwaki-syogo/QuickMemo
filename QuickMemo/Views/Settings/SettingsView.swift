@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(GitHubAccount.self) private var gitHubAccount
     @Environment(StoreKitService.self) private var storeKitService
     @State private var authService = GitHubAuthService()
+    @State private var tokenInput = ""
     @State private var isAuthenticating = false
     @State private var errorMessage: String?
 
@@ -23,14 +24,6 @@ struct SettingsView: View {
             await storeKitService.loadProduct()
         }
         .navigationBarTitleDisplayMode(.inline)
-        .alert("エラー", isPresented: .init(
-            get: { errorMessage != nil },
-            set: { if !$0 { errorMessage = nil } }
-        )) {
-            Button("OK") { errorMessage = nil }
-        } message: {
-            Text(errorMessage ?? "")
-        }
     }
 
     private var gitHubSection: some View {
@@ -79,15 +72,33 @@ struct SettingsView: View {
                     gitHubAccount.reset()
                 }
             } else {
+                SecureField("Personal Access Token を入力", text: $tokenInput)
+                    .textContentType(.password)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+
+                Text("GitHub Settings > Developer settings > Personal access tokens (classic) から repo スコープで作成")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
                 Button {
                     authenticateWithGitHub()
                 } label: {
                     HStack {
-                        Image(systemName: "link")
-                        Text("GitHubと連携")
+                        if isAuthenticating {
+                            ProgressView()
+                                .controlSize(.small)
+                        }
+                        Text("連携する")
                     }
                 }
-                .disabled(isAuthenticating)
+                .disabled(tokenInput.isEmpty || isAuthenticating)
+
+                if let errorMessage {
+                    Text(errorMessage)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
             }
         }
     }
@@ -155,14 +166,16 @@ struct SettingsView: View {
 
     private func authenticateWithGitHub() {
         isAuthenticating = true
+        errorMessage = nil
         Task {
             do {
-                _ = try await authService.authenticate()
+                try await authService.login(token: tokenInput)
                 let apiClient = GitHubAPIClient()
                 let user = try await apiClient.fetchUser()
                 gitHubAccount.username = user.login
                 gitHubAccount.avatarURL = user.avatarURL
                 gitHubAccount.isLinked = true
+                tokenInput = ""
             } catch {
                 errorMessage = error.localizedDescription
             }

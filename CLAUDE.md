@@ -20,9 +20,8 @@ xcodegen generate && xcodebuild build -scheme QuickMemo
 - `docs/` — Documentation (committed to Git)
 
 ## Configuration
-- **GitHub OAuth**: Credentials stored in `GitHub.xcconfig` (listed in `.gitignore`, never commit)
-- See `GitHub.xcconfig.example` for the template
-- Setup instructions: `docs/GITHUB_OAUTH_SETUP.md`
+- **GitHub Integration**: Uses Personal Access Token (PAT) — no OAuth App registration needed
+- Setup instructions: `docs/GITHUB_SETUP.md`
 
 ## Known Issues / Gotchas
 - **SwiftUI.Label vs Models.Label**: The app has a `Label` model that conflicts with `SwiftUI.Label`. Always use explicit module prefixes when both are in scope (e.g., `QuickMemo.Label` for the model).
