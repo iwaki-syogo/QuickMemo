@@ -31,6 +31,7 @@
 		C47E0706227FD2506ECA7B4D /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */; };
 		C82FAF5B729242640E8DF870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A340E62F39DBB68D7FB3B /* Assets.xcassets */; };
 		C88761FE16B852299B33B814 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37A5F4BDF1F8F5407C1844A /* StoreKitService.swift */; };
+		D10DDBF768534F6BB0910F76 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 5B921E276BB6CA7359F3E7F9 /* GoogleMobileAds */; };
 		D19C26BC0400EBE10B81B0D1 /* QuickMemoWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132AD177E6B4DB3E9DE1CDF /* QuickMemoWidgetBundle.swift */; };
 		D31E9C199194825B6DE352BD /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81626B18BC5FE2053C8DAB /* MemoDetailView.swift */; };
 		D4DBC2D0F3E713A9ED5E617E /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */; };
@@ -101,6 +102,17 @@
 		F132AD177E6B4DB3E9DE1CDF /* QuickMemoWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickMemoWidgetBundle.swift; sourceTree = "<group>"; };
 		F3F7F2B36E5F8DCBB2EF0EC6 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		804379AC6601E70E96800A16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D10DDBF768534F6BB0910F76 /* GoogleMobileAds in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		187B97B7460C03AE16E4CB5E = {
@@ -299,6 +311,7 @@
 			buildPhases = (
 				BC04E7A49B666A3F0942D11F /* Sources */,
 				976E772E5265C6C9CE8A1538 /* Resources */,
+				804379AC6601E70E96800A16 /* Frameworks */,
 				4C0FEC3F88E29821A3F19616 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -308,6 +321,7 @@
 			);
 			name = QuickMemo;
 			packageProductDependencies = (
+				5B921E276BB6CA7359F3E7F9 /* GoogleMobileAds */,
 			);
 			productName = QuickMemo;
 			productReference = 6E0917CE0C01D6B8D4D44DDF /* QuickMemo.app */;
@@ -340,6 +354,9 @@
 			);
 			mainGroup = 187B97B7460C03AE16E4CB5E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FF0A391C5F6A9D6820E66319 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
@@ -457,7 +474,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -495,7 +512,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -536,7 +553,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -583,7 +600,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -663,6 +680,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF0A391C5F6A9D6820E66319 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5B921E276BB6CA7359F3E7F9 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF0A391C5F6A9D6820E66319 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5586A076A58D4E1DEF929CF9 /* Project object */;
 }

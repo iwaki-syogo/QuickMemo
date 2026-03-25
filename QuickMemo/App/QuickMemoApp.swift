@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import GoogleMobileAds
 
 @main
 struct QuickMemoApp: App {
@@ -7,6 +8,10 @@ struct QuickMemoApp: App {
     @State private var syncService = SyncService()
     @State private var storeKitService = StoreKitService()
     @State private var showNewMemo = true
+
+    init() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+    }
 
     var body: some Scene {
         WindowGroup {

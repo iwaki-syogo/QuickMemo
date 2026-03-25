@@ -6,13 +6,20 @@ struct MemoListView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(GitHubAccount.self) private var gitHubAccount
     @Environment(SyncService.self) private var syncService
-    @State private var viewModel = MemoListViewModel()
+    @Query(sort: \Memo.updatedAt, order: .reverse) private var allMemos: [Memo]
+
+    // MARK: - Computed filters
+
+    private var pinnedMemos: [Memo] { allMemos.filter { $0.isPinned } }
+    private var openMemos: [Memo] { allMemos.filter { !$0.isPinned && $0.status == .open } }
+    private var closedMemos: [Memo] { allMemos.filter { !$0.isPinned && $0.status == .closed } }
+    private var otherMemos: [Memo] { allMemos.filter { !$0.isPinned } }
 
     var body: some View {
         VStack(spacing: 0) {
             Group {
-                if viewModel.pinnedMemos.isEmpty && viewModel.otherMemos.isEmpty &&
-                    viewModel.openMemos.isEmpty && viewModel.closedMemos.isEmpty {
+                if pinnedMemos.isEmpty && otherMemos.isEmpty &&
+                    openMemos.isEmpty && closedMemos.isEmpty {
                     emptyStateView
                 } else {
                     memoList
@@ -31,16 +38,10 @@ struct MemoListView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.setModelContext(modelContext)
-            viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
-        }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
-                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                 Task {
                     await syncService.retryFailedAndPending(account: gitHubAccount, context: modelContext)
-                    viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                 }
             }
         }
@@ -63,34 +64,34 @@ struct MemoListView: View {
 
     private var memoList: some View {
         List {
-            if !viewModel.pinnedMemos.isEmpty {
+            if !pinnedMemos.isEmpty {
                 Section("ピン留め") {
-                    ForEach(viewModel.pinnedMemos, id: \.id) { memo in
+                    ForEach(pinnedMemos, id: \.id) { memo in
                         memoNavigationLink(memo: memo, pinAction: "ピン解除", pinIcon: "pin.slash")
                     }
                 }
             }
 
             if gitHubAccount.isLinked {
-                if !viewModel.openMemos.isEmpty {
+                if !openMemos.isEmpty {
                     Section("オープン") {
-                        ForEach(viewModel.openMemos, id: \.id) { memo in
+                        ForEach(openMemos, id: \.id) { memo in
                             memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
                     }
                 }
 
-                if !viewModel.closedMemos.isEmpty {
+                if !closedMemos.isEmpty {
                     Section("クローズ") {
-                        ForEach(viewModel.closedMemos, id: \.id) { memo in
+                        ForEach(closedMemos, id: \.id) { memo in
                             memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
                     }
                 }
             } else {
-                if !viewModel.otherMemos.isEmpty {
+                if !otherMemos.isEmpty {
                     Section {
-                        ForEach(viewModel.otherMemos, id: \.id) { memo in
+                        ForEach(otherMemos, id: \.id) { memo in
                             memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                         }
                     }
@@ -124,8 +125,7 @@ struct MemoListView: View {
         }
         .swipeActions(edge: .leading) {
             Button {
-                viewModel.togglePin(memo)
-                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                togglePin(memo)
             } label: {
                 SwiftUI.Label(pinAction, systemImage: pinIcon)
             }
@@ -142,18 +142,16 @@ struct MemoListView: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(role: .destructive) {
-                viewModel.deleteMemo(memo)
-                viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
+                deleteMemo(memo)
             } label: {
                 SwiftUI.Label("削除", systemImage: "trash")
             }
 
             if memo.status == .open {
                 Button {
-                    viewModel.toggleStatus(memo)
+                    toggleStatus(memo)
                     Task {
                         await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
-                        viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
                 } label: {
                     SwiftUI.Label("クローズ", systemImage: "checkmark.circle")
@@ -161,10 +159,9 @@ struct MemoListView: View {
                 .tint(.green)
             } else {
                 Button {
-                    viewModel.toggleStatus(memo)
+                    toggleStatus(memo)
                     Task {
                         await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
-                        viewModel.fetchMemos(isGitHubLinked: gitHubAccount.isLinked)
                     }
                 } label: {
                     SwiftUI.Label("再開", systemImage: "arrow.uturn.left")
@@ -180,6 +177,37 @@ struct MemoListView: View {
                 }
                 .tint(.gray)
             }
+        }
+    }
+
+    // MARK: - Actions
+
+    private func togglePin(_ memo: Memo) {
+        memo.isPinned.toggle()
+        memo.updatedAt = Date()
+        do {
+            try modelContext.save()
+        } catch {
+            print("[QuickMemo] Failed to save after togglePin: \(error)")
+        }
+    }
+
+    private func toggleStatus(_ memo: Memo) {
+        memo.status = (memo.status == .open) ? .closed : .open
+        memo.updatedAt = Date()
+        do {
+            try modelContext.save()
+        } catch {
+            print("[QuickMemo] Failed to save after toggleStatus: \(error)")
+        }
+    }
+
+    private func deleteMemo(_ memo: Memo) {
+        modelContext.delete(memo)
+        do {
+            try modelContext.save()
+        } catch {
+            print("[QuickMemo] Failed to save after deleteMemo: \(error)")
         }
     }
 
