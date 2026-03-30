@@ -20,14 +20,21 @@ struct QuickMemoApp: App {
             modelContainer = try ModelContainer(for: Memo.self, Label.self)
             logger.notice("ModelContainer initialized successfully")
         } catch {
-            logger.error("ModelContainer initialization FAILED: \(error). Creating fresh store.")
-            // If migration fails, delete and recreate the store
-            let schema = Schema([Memo.self, Label.self])
-            let config = ModelConfiguration(isStoredInMemoryOnly: false)
+            logger.error("ModelContainer initialization FAILED: \(error). Deleting store and recreating.")
+            let config = ModelConfiguration()
+            let storeURL = config.url
+            let storeDir = storeURL.deletingLastPathComponent()
+            let storeName = storeURL.lastPathComponent
+            for suffix in ["", "-wal", "-shm"] {
+                let fileURL = storeDir.appending(path: storeName + suffix)
+                try? FileManager.default.removeItem(at: fileURL)
+            }
+            logger.notice("Deleted old store at \(storeURL.path)")
             do {
-                modelContainer = try ModelContainer(for: schema, configurations: [config])
+                modelContainer = try ModelContainer(for: Memo.self, Label.self)
+                logger.notice("ModelContainer recreated successfully after store deletion")
             } catch {
-                fatalError("Failed to create ModelContainer: \(error)")
+                fatalError("Failed to create ModelContainer even after store deletion: \(error)")
             }
         }
     }
