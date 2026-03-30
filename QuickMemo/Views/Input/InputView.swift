@@ -34,6 +34,15 @@ struct InputView: View {
         }
         .navigationTitle("新規メモ")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("完了") {
+                    viewModel.save()
+                    syncNewMemo()
+                    dismiss()
+                }
+            }
+        }
         .onAppear {
             viewModel.setModelContext(modelContext)
             isTitleFocused = true
