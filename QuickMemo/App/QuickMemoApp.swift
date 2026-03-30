@@ -1,6 +1,9 @@
 import SwiftUI
 import SwiftData
 import GoogleMobileAds
+import os
+
+private let logger = Logger(subsystem: "com.iwakisyogo.QuickMemo", category: "App")
 
 @main
 struct QuickMemoApp: App {
@@ -9,8 +12,24 @@ struct QuickMemoApp: App {
     @State private var storeKitService = StoreKitService()
     @State private var showNewMemo = true
 
+    let modelContainer: ModelContainer
+
     init() {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        do {
+            modelContainer = try ModelContainer(for: Memo.self, Label.self)
+            logger.notice("ModelContainer initialized successfully")
+        } catch {
+            logger.error("ModelContainer initialization FAILED: \(error). Creating fresh store.")
+            // If migration fails, delete and recreate the store
+            let schema = Schema([Memo.self, Label.self])
+            let config = ModelConfiguration(isStoredInMemoryOnly: false)
+            do {
+                modelContainer = try ModelContainer(for: schema, configurations: [config])
+            } catch {
+                fatalError("Failed to create ModelContainer: \(error)")
+            }
+        }
     }
 
     var body: some Scene {
@@ -34,6 +53,6 @@ struct QuickMemoApp: App {
                     await storeKitService.checkEntitlements()
                 }
         }
-        .modelContainer(for: [Memo.self, Label.self])
+        .modelContainer(modelContainer)
     }
 }

@@ -58,6 +58,7 @@ struct MemoListView: View {
             Text("右上のボタンから新しいメモを作成できます")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

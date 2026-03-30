@@ -26,7 +26,7 @@ class Memo {
     var githubIssueURL: String?
     @Attribute(originalName: "syncStatus") var syncStatusRaw: String
 
-    var syncStatus: SyncStatus {
+    @Transient var syncStatus: SyncStatus {
         get { SyncStatus(rawValue: syncStatusRaw) ?? .notLinked }
         set { syncStatusRaw = newValue.rawValue }
     }
