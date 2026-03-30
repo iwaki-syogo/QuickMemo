@@ -33,6 +33,8 @@ class Memo {
     var syncError: String?
     var lastSyncedAt: Date?
     var labelIDs: [UUID]
+    var repositoryOwner: String?
+    var repositoryName: String?
 
     init(
         id: UUID = UUID(),
@@ -47,7 +49,9 @@ class Memo {
         syncStatus: SyncStatus = .notLinked,
         syncError: String? = nil,
         lastSyncedAt: Date? = nil,
-        labelIDs: [UUID] = []
+        labelIDs: [UUID] = [],
+        repositoryOwner: String? = nil,
+        repositoryName: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -62,5 +66,7 @@ class Memo {
         self.syncError = syncError
         self.lastSyncedAt = lastSyncedAt
         self.labelIDs = labelIDs
+        self.repositoryOwner = repositoryOwner
+        self.repositoryName = repositoryName
     }
 }

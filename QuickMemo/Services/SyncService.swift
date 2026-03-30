@@ -11,8 +11,8 @@ class SyncService {
     func syncMemo(_ memo: Memo, account: GitHubAccount, context: ModelContext) async {
         guard account.isLinked, account.hasRepository else { return }
 
-        let owner = account.repositoryOwner
-        let repo = account.repositoryName
+        let owner = memo.repositoryOwner ?? account.repositoryOwner
+        let repo = memo.repositoryName ?? account.repositoryName
 
         memo.syncStatus = .pending
         do { try context.save() } catch { print("[QuickMemo] Failed to save pending status: \(error)") }
@@ -82,6 +82,68 @@ class SyncService {
 
         for memo in memos {
             await syncMemo(memo, account: account, context: context)
+        }
+    }
+
+    func transferMemo(_ memo: Memo, toOwner newOwner: String, repoName newRepo: String, account: GitHubAccount, context: ModelContext) async {
+        let oldOwner = memo.repositoryOwner ?? account.repositoryOwner
+        let oldRepo = memo.repositoryName ?? account.repositoryName
+
+        memo.syncStatus = .pending
+        do { try context.save() } catch { print("[QuickMemo] Failed to save pending status: \(error)") }
+
+        do {
+            let labelNames = fetchLabelNames(for: memo, context: context)
+            let alreadySameRepo = memo.repositoryOwner == newOwner && memo.repositoryName == newRepo
+
+            // Close old issue (skip if already pointing to the same repo)
+            if !alreadySameRepo, let oldIssueNumber = memo.githubIssueNumber {
+                let transferNote = "\n\n---\n> Transferred to [\(newOwner)/\(newRepo)](https://github.com/\(newOwner)/\(newRepo))"
+                let oldBody = (memo.body ?? "") + transferNote
+                _ = try await apiClient.updateIssue(
+                    owner: oldOwner,
+                    repo: oldRepo,
+                    number: oldIssueNumber,
+                    body: oldBody,
+                    state: "closed"
+                )
+            }
+
+            // Create issue in new repo
+            let originNote = "\n\n---\n> Transferred from [\(oldOwner)/\(oldRepo)](https://github.com/\(oldOwner)/\(oldRepo))"
+            let newBody = (memo.body ?? "") + originNote
+            let newIssue = try await apiClient.createIssue(
+                owner: newOwner,
+                repo: newRepo,
+                title: memo.title,
+                body: newBody,
+                labels: labelNames
+            )
+
+            // Update memo properties
+            memo.githubIssueNumber = newIssue.number
+            memo.githubIssueURL = newIssue.htmlURL
+            memo.repositoryOwner = newOwner
+            memo.repositoryName = newRepo
+            memo.syncStatus = .synced
+            memo.syncError = nil
+            memo.lastSyncedAt = Date()
+
+            // Best-effort label setting
+            if !labelNames.isEmpty {
+                try? await apiClient.setIssueLabels(
+                    owner: newOwner,
+                    repo: newRepo,
+                    number: newIssue.number,
+                    labels: labelNames
+                )
+            }
+
+            do { try context.save() } catch { print("[QuickMemo] Failed to save after transfer: \(error)") }
+        } catch {
+            memo.syncStatus = .failed
+            memo.syncError = error.localizedDescription
+            do { try context.save() } catch { print("[QuickMemo] Failed to save failed status: \(error)") }
         }
     }
 
