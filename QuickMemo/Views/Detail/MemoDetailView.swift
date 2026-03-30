@@ -303,7 +303,13 @@ struct MemoDetailView: View {
 
     private func retrySyncMemo() {
         Task {
-            await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+            if memo.syncError?.hasPrefix("[transfer]") == true,
+               let owner = memo.repositoryOwner,
+               let repo = memo.repositoryName {
+                await syncService.transferMemo(memo, toOwner: owner, repoName: repo, account: gitHubAccount, context: modelContext)
+            } else {
+                await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+            }
         }
     }
 }
