@@ -74,7 +74,7 @@ class SyncService {
         let failedRaw = SyncStatus.failed.rawValue
         let descriptor = FetchDescriptor<Memo>(
             predicate: #Predicate<Memo> { memo in
-                memo.syncStatus.rawValue == pendingRaw || memo.syncStatus.rawValue == failedRaw
+                memo.syncStatusRaw == pendingRaw || memo.syncStatusRaw == failedRaw
             }
         )
 

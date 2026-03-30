@@ -24,7 +24,12 @@ class Memo {
     var updatedAt: Date
     var githubIssueNumber: Int?
     var githubIssueURL: String?
-    var syncStatus: SyncStatus
+    @Attribute(originalName: "syncStatus") var syncStatusRaw: String
+
+    var syncStatus: SyncStatus {
+        get { SyncStatus(rawValue: syncStatusRaw) ?? .notLinked }
+        set { syncStatusRaw = newValue.rawValue }
+    }
     var syncError: String?
     var lastSyncedAt: Date?
     var labelIDs: [UUID]
@@ -53,7 +58,7 @@ class Memo {
         self.updatedAt = updatedAt
         self.githubIssueNumber = githubIssueNumber
         self.githubIssueURL = githubIssueURL
-        self.syncStatus = syncStatus
+        self.syncStatusRaw = syncStatus.rawValue
         self.syncError = syncError
         self.lastSyncedAt = lastSyncedAt
         self.labelIDs = labelIDs

@@ -39,7 +39,7 @@ struct MemoListView: View {
             }
         }
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active {
+            if newPhase == .active, gitHubAccount.isLinked {
                 Task {
                     await syncService.retryFailedAndPending(account: gitHubAccount, context: modelContext)
                 }
