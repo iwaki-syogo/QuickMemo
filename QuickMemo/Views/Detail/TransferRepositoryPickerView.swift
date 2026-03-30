@@ -81,7 +81,7 @@ struct TransferRepositoryPickerView: View {
             loadRepositories()
         }
         .alert("リポジトリを移動", isPresented: $showConfirmAlert) {
-            Button("移動", role: .destructive) {
+            Button("移動する", role: .destructive) {
                 if let repo = selectedRepo {
                     onTransfer(repo.owner.login, repo.name)
                     dismiss()

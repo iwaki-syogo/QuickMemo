@@ -81,7 +81,13 @@ class SyncService {
         guard let memos = try? context.fetch(descriptor) else { return }
 
         for memo in memos {
-            await syncMemo(memo, account: account, context: context)
+            if memo.syncError?.hasPrefix("[transfer]") == true,
+               let owner = memo.repositoryOwner,
+               let repo = memo.repositoryName {
+                await transferMemo(memo, toOwner: owner, repoName: repo, account: account, context: context)
+            } else {
+                await syncMemo(memo, account: account, context: context)
+            }
         }
     }
 
@@ -96,8 +102,12 @@ class SyncService {
             let labelNames = fetchLabelNames(for: memo, context: context)
             let alreadySameRepo = memo.repositoryOwner == newOwner && memo.repositoryName == newRepo
 
+            // Capture old issue info before intermediate state may clear them
+            let oldIssueNumber = memo.githubIssueNumber
+            let oldIssueURL = memo.githubIssueURL
+
             // Close old issue (skip if already pointing to the same repo)
-            if !alreadySameRepo, let oldIssueNumber = memo.githubIssueNumber {
+            if !alreadySameRepo, let oldIssueNumber {
                 let transferNote = "\n\n---\n> Transferred to [\(newOwner)/\(newRepo)](https://github.com/\(newOwner)/\(newRepo))"
                 let oldBody = (memo.body ?? "") + transferNote
                 _ = try await apiClient.updateIssue(
@@ -107,10 +117,21 @@ class SyncService {
                     body: oldBody,
                     state: "closed"
                 )
+
+                // Persist intermediate state so retry skips the old close
+                memo.repositoryOwner = newOwner
+                memo.repositoryName = newRepo
+                memo.githubIssueNumber = nil
+                memo.githubIssueURL = nil
+                do { try context.save() } catch {
+                    print("[QuickMemo] Failed to save intermediate transfer state: \(error)")
+                }
             }
 
-            // Create issue in new repo
-            let originNote = "\n\n---\n> Transferred from [\(oldOwner)/\(oldRepo)](https://github.com/\(oldOwner)/\(oldRepo))"
+            // Use captured old issue info for the cross-reference link
+            let oldNumber = oldIssueNumber ?? 0
+            let oldURL = oldIssueURL ?? "https://github.com/\(oldOwner)/\(oldRepo)"
+            let originNote = "\n\n---\n> Transferred from [\(oldOwner)/\(oldRepo)#\(oldNumber)](\(oldURL))"
             let newBody = (memo.body ?? "") + originNote
             let newIssue = try await apiClient.createIssue(
                 owner: newOwner,
@@ -142,7 +163,7 @@ class SyncService {
             do { try context.save() } catch { print("[QuickMemo] Failed to save after transfer: \(error)") }
         } catch {
             memo.syncStatus = .failed
-            memo.syncError = error.localizedDescription
+            memo.syncError = "[transfer] " + error.localizedDescription
             do { try context.save() } catch { print("[QuickMemo] Failed to save failed status: \(error)") }
         }
     }

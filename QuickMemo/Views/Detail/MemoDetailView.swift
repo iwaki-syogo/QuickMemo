@@ -266,6 +266,7 @@ struct MemoDetailView: View {
                         .background(Color.orange.opacity(0.1))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
+                    .disabled(memo.syncStatus == .pending)
                 }
             }
         }
