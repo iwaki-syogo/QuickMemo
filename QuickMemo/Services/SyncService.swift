@@ -165,6 +165,62 @@ class SyncService {
         }
     }
 
+    func importIssues(account: GitHubAccount, context: ModelContext) async {
+        guard account.isLinked, account.hasRepository else { return }
+        guard !isSyncing else { return }
+
+        isSyncing = true
+        defer { isSyncing = false }
+
+        let owner = account.repositoryOwner
+        let repo = account.repositoryName
+
+        do {
+            let issues = try await apiClient.fetchIssues(owner: owner, repo: repo, state: "open")
+
+            // Fetch existing issue numbers to avoid duplicates
+            let descriptor = FetchDescriptor<Memo>()
+            let existingMemos = (try? context.fetch(descriptor)) ?? []
+            let existingIssueNumbers = Set(existingMemos.compactMap(\.githubIssueNumber))
+
+            // Fetch all local labels for matching
+            let labelDescriptor = FetchDescriptor<Label>()
+            let allLabels = (try? context.fetch(labelDescriptor)) ?? []
+
+            for issue in issues {
+                // Skip pull requests (GitHub Issues API includes PRs — PRs have /pull/ in URL)
+                guard issue.htmlURL.contains("/issues/") else { continue }
+                guard !existingIssueNumbers.contains(issue.number) else { continue }
+
+                let memo = Memo(
+                    title: issue.title,
+                    body: issue.body,
+                    status: issue.state == "open" ? .open : .closed,
+                    githubIssueNumber: issue.number,
+                    githubIssueURL: issue.htmlURL,
+                    syncStatus: .synced,
+                    lastSyncedAt: Date(),
+                    repositoryOwner: owner,
+                    repositoryName: repo
+                )
+
+                // Match labels by name
+                if let issueLabels = issue.labels {
+                    let matchedIDs = issueLabels.compactMap { ghLabel in
+                        allLabels.first(where: { $0.name == ghLabel.name })?.id
+                    }
+                    memo.labelIDs = matchedIDs
+                }
+
+                context.insert(memo)
+            }
+
+            try context.save()
+        } catch {
+            print("[QuickMemo] Failed to import issues: \(error)")
+        }
+    }
+
     private func fetchLabelNames(for memo: Memo, context: ModelContext) -> [String] {
         guard !memo.labelIDs.isEmpty else { return [] }
 

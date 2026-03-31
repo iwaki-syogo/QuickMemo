@@ -40,9 +40,12 @@ struct GitHubIssue: Codable {
     let number: Int
     let htmlURL: String
     let state: String
+    let title: String
+    let body: String?
+    let labels: [GitHubLabel]?
 
     enum CodingKeys: String, CodingKey {
-        case number, state
+        case number, state, title, body, labels
         case htmlURL = "html_url"
     }
 }
@@ -121,6 +124,11 @@ struct GitHubAPIClient {
     func setIssueLabels(owner: String, repo: String, number: Int, labels: [String]) async throws {
         let body: [String: Any] = ["labels": labels]
         _ = try await makeRequest("/repos/\(owner)/\(repo)/issues/\(number)/labels", method: "PUT", body: body)
+    }
+
+    func fetchIssues(owner: String, repo: String, state: String = "open", page: Int = 1) async throws -> [GitHubIssue] {
+        let (data, _) = try await makeRequest("/repos/\(owner)/\(repo)/issues?state=\(state)&per_page=100&page=\(page)")
+        return try JSONDecoder().decode([GitHubIssue].self, from: data)
     }
 
     func fetchLabels(owner: String, repo: String) async throws -> [GitHubLabel] {
