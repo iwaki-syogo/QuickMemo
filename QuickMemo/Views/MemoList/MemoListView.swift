@@ -103,7 +103,15 @@ struct MemoListView: View {
         .sheet(item: $labelPickerMemo) { memo in
             LabelPickerSheet(selectedLabelIDs: Binding(
                 get: { memo.labelIDs },
-                set: { memo.labelIDs = $0 }
+                set: { newValue in
+                    memo.labelIDs = newValue
+                    try? modelContext.save()
+                    if gitHubAccount.isLinked, gitHubAccount.hasRepository {
+                        Task {
+                            await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                        }
+                    }
+                }
             ))
         }
     }
