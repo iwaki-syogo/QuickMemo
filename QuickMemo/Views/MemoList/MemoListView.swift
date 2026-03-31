@@ -7,6 +7,7 @@ struct MemoListView: View {
     @Environment(GitHubAccount.self) private var gitHubAccount
     @Environment(SyncService.self) private var syncService
     @Query(sort: \Memo.updatedAt, order: .reverse) private var allMemos: [Memo]
+    @Query(sort: \QuickMemo.Label.name) private var allLabels: [QuickMemo.Label]
 
     // MARK: - Computed filters
 
@@ -123,7 +124,7 @@ struct MemoListView: View {
             MemoDetailView(memo: memo)
         } label: {
             HStack {
-                MemoRowView(memo: memo)
+                MemoRowView(memo: memo, labels: labelsForMemo(memo))
 
                 if memo.syncStatus == .failed {
                     Image(systemName: "exclamationmark.triangle")
@@ -224,5 +225,9 @@ struct MemoListView: View {
         guard let urlString = memo.githubIssueURL,
               let url = URL(string: urlString) else { return }
         UIApplication.shared.open(url)
+    }
+
+    private func labelsForMemo(_ memo: Memo) -> [QuickMemo.Label] {
+        allLabels.filter { memo.labelIDs.contains($0.id) }
     }
 }
