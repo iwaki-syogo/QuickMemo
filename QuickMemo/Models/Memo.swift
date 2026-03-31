@@ -24,10 +24,17 @@ class Memo {
     var updatedAt: Date
     var githubIssueNumber: Int?
     var githubIssueURL: String?
-    var syncStatus: SyncStatus
+    @Attribute(originalName: "syncStatus") var syncStatusRaw: String
+
+    var syncStatus: SyncStatus {
+        get { SyncStatus(rawValue: syncStatusRaw) ?? .notLinked }
+        set { syncStatusRaw = newValue.rawValue }
+    }
     var syncError: String?
     var lastSyncedAt: Date?
     var labelIDs: [UUID]
+    var repositoryOwner: String?
+    var repositoryName: String?
 
     init(
         id: UUID = UUID(),
@@ -42,7 +49,9 @@ class Memo {
         syncStatus: SyncStatus = .notLinked,
         syncError: String? = nil,
         lastSyncedAt: Date? = nil,
-        labelIDs: [UUID] = []
+        labelIDs: [UUID] = [],
+        repositoryOwner: String? = nil,
+        repositoryName: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -53,9 +62,11 @@ class Memo {
         self.updatedAt = updatedAt
         self.githubIssueNumber = githubIssueNumber
         self.githubIssueURL = githubIssueURL
-        self.syncStatus = syncStatus
+        self.syncStatusRaw = syncStatus.rawValue
         self.syncError = syncError
         self.lastSyncedAt = lastSyncedAt
         self.labelIDs = labelIDs
+        self.repositoryOwner = repositoryOwner
+        self.repositoryName = repositoryName
     }
 }

@@ -17,6 +17,7 @@
 		33608C46982B5D0723BCE4E4 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F7F2B36E5F8DCBB2EF0EC6 /* DateFormatting.swift */; };
 		42A047922F9BD3F764F67206 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282579A74F28FA7101EF1DA /* Label.swift */; };
 		535BCE467626BDC93482B53A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BE4A02F21412AA52C3FAD /* Constants.swift */; };
+		59E5D28355683752E3120A6D /* TransferRepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */; };
 		6C17F722CB21C76A3CDB449A /* QuickMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC9B9B3C2A8E6D92E29926 /* QuickMemoApp.swift */; };
 		6DE1601570B7E5C25A5BA4B5 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006B0173479E71468490B328 /* SyncService.swift */; };
 		77E5FD064ACE44E5CF8E499C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFA311DD144868B547DB512 /* InputView.swift */; };
@@ -90,6 +91,7 @@
 		91E203CF13D5F1400AD0309F /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
 		A282579A74F28FA7101EF1DA /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAFA311DD144868B547DB512 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryPickerView.swift; sourceTree = "<group>"; };
 		BBCCAE224F87B12539937132 /* LabelPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPickerSheet.swift; sourceTree = "<group>"; };
 		BC67CA81AEDCD6882CCD2A8C /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		BCC02A76A90C2D6B2BE8E18A /* MemoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewModel.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				0B81626B18BC5FE2053C8DAB /* MemoDetailView.swift */,
+				B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				24F51BCE55EB5CD7AF17512A /* SettingsView.swift in Sources */,
 				C88761FE16B852299B33B814 /* StoreKitService.swift in Sources */,
 				6DE1601570B7E5C25A5BA4B5 /* SyncService.swift in Sources */,
+				59E5D28355683752E3120A6D /* TransferRepositoryPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +478,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -512,7 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -553,7 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -600,7 +604,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_NS_ASSERTIONS = NO;

@@ -8,15 +8,20 @@ struct AdBannerView: View {
         if !storeKitService.isAdFree {
             BannerAdView()
                 .frame(height: 50)
+                .background(Color.gray.opacity(0.1))
         }
     }
 }
 
 struct BannerAdView: UIViewRepresentable {
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
     func makeUIView(context: Context) -> GADBannerView {
         let banner = GADBannerView(adSize: GADAdSizeBanner)
-        // Test ad unit ID (replace before production release)
-        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.adUnitID = "ca-app-pub-1265529246324725/7315685794"
+        banner.delegate = context.coordinator
         return banner
     }
 
@@ -27,6 +32,16 @@ struct BannerAdView: UIViewRepresentable {
                 uiView.rootViewController = rootVC
                 uiView.load(GADRequest())
             }
+        }
+    }
+
+    class Coordinator: NSObject, GADBannerViewDelegate {
+        func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+            print("[AdMob] Ad loaded successfully")
+        }
+
+        func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+            print("[AdMob] Failed to load ad: \(error.localizedDescription)")
         }
     }
 }

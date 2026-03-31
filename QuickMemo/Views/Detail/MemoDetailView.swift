@@ -11,6 +11,8 @@ struct MemoDetailView: View {
     @State private var viewModel = MemoDetailViewModel()
     @State private var showLabelPicker = false
     @State private var selectedLabelIDs: [UUID] = []
+    @State private var showTransferPicker = false
+    @State private var isTransferring = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -40,6 +42,10 @@ struct MemoDetailView: View {
                         syncStatusSection
                     }
 
+                    if gitHubAccount.isLinked {
+                        repositorySection
+                    }
+
                     metadataSection
 
                     if gitHubAccount.isLinked, memo.githubIssueURL != nil {
@@ -63,6 +69,21 @@ struct MemoDetailView: View {
             if newPhase == .inactive || newPhase == .background {
                 saveMemo()
             }
+        }
+        .sheet(isPresented: $showTransferPicker) {
+            NavigationStack {
+                TransferRepositoryPickerView(
+                    currentOwner: memo.repositoryOwner ?? gitHubAccount.repositoryOwner,
+                    currentRepo: memo.repositoryName ?? gitHubAccount.repositoryName
+                ) { newOwner, newRepo in
+                    isTransferring = true
+                    Task {
+                        await syncService.transferMemo(memo, toOwner: newOwner, repoName: newRepo, account: gitHubAccount, context: modelContext)
+                        isTransferring = false
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showLabelPicker) {
             LabelPickerSheet(selectedLabelIDs: $selectedLabelIDs)
@@ -208,6 +229,49 @@ struct MemoDetailView: View {
         .padding(.top, 8)
     }
 
+    private var repositorySection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("同期先リポジトリ")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+
+                Text("\(memo.repositoryOwner ?? gitHubAccount.repositoryOwner)/\(memo.repositoryName ?? gitHubAccount.repositoryName)")
+                    .font(.subheadline)
+                    .foregroundStyle(.primary)
+            }
+
+            if gitHubAccount.isLinked && memo.githubIssueNumber != nil {
+                if isTransferring {
+                    HStack(spacing: 6) {
+                        ProgressView()
+                            .controlSize(.mini)
+                        Text("移動中...")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                } else {
+                    Button {
+                        showTransferPicker = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "arrow.triangle.swap")
+                            Text("リポジトリを移動")
+                        }
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color.orange.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    .disabled(memo.syncStatus == .pending)
+                }
+            }
+        }
+    }
+
     private var gitHubLinkSection: some View {
         Button {
             if let urlString = memo.githubIssueURL,
@@ -239,7 +303,13 @@ struct MemoDetailView: View {
 
     private func retrySyncMemo() {
         Task {
-            await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+            if memo.syncError?.hasPrefix("[transfer]") == true,
+               let owner = memo.repositoryOwner,
+               let repo = memo.repositoryName {
+                await syncService.transferMemo(memo, toOwner: owner, repoName: repo, account: gitHubAccount, context: modelContext)
+            } else {
+                await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+            }
         }
     }
 }
