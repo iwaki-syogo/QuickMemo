@@ -183,9 +183,11 @@ class SyncService {
             let existingMemos = (try? context.fetch(descriptor)) ?? []
             let existingIssueNumbers = Set(existingMemos.compactMap(\.githubIssueNumber))
 
-            // Fetch all local labels for matching
+            // Build mutable label lookup by githubID so missing labels can be created
             let labelDescriptor = FetchDescriptor<Label>()
-            let allLabels = (try? context.fetch(labelDescriptor)) ?? []
+            var labelsByGithubID: [Int: Label] = Dictionary(
+                uniqueKeysWithValues: ((try? context.fetch(labelDescriptor)) ?? []).map { ($0.githubID, $0) }
+            )
 
             for issue in issues {
                 // Skip pull requests (GitHub Issues API includes PRs — PRs have /pull/ in URL)
@@ -204,12 +206,18 @@ class SyncService {
                     repositoryName: repo
                 )
 
-                // Match labels by name
+                // Resolve or create labels by githubID so colors and names display correctly
                 if let issueLabels = issue.labels {
-                    let matchedIDs = issueLabels.compactMap { ghLabel in
-                        allLabels.first(where: { $0.name == ghLabel.name })?.id
+                    let resolvedIDs = issueLabels.map { ghLabel -> UUID in
+                        if let existing = labelsByGithubID[ghLabel.id] {
+                            return existing.id
+                        }
+                        let newLabel = Label(githubID: ghLabel.id, name: ghLabel.name, color: ghLabel.color)
+                        context.insert(newLabel)
+                        labelsByGithubID[ghLabel.id] = newLabel
+                        return newLabel.id
                     }
-                    memo.labelIDs = matchedIDs
+                    memo.labelIDs = resolvedIDs
                 }
 
                 context.insert(memo)
