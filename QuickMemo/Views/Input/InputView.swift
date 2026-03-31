@@ -9,6 +9,7 @@ struct InputView: View {
     @Environment(SyncService.self) private var syncService
 
     @State private var viewModel = InputViewModel()
+    @State private var hasSynced = false
     @FocusState private var isTitleFocused: Bool
 
     var body: some View {
@@ -60,9 +61,11 @@ struct InputView: View {
     }
 
     private func syncNewMemo() {
+        guard !hasSynced else { return }
         guard let memo = viewModel.savedMemo,
               gitHubAccount.isLinked, gitHubAccount.hasRepository else { return }
 
+        hasSynced = true
         Task {
             await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
         }
