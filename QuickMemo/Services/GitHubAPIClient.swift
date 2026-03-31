@@ -47,6 +47,30 @@ struct GitHubIssue: Codable {
     }
 }
 
+struct GitHubIssueDetail: Codable {
+    let number: Int
+    let title: String
+    let body: String?
+    let state: String
+    let htmlURL: String
+    let createdAt: Date
+    let updatedAt: Date
+    let labels: [GitHubLabel]
+    let pullRequest: PullRequestRef?
+
+    struct PullRequestRef: Codable {}
+
+    var isPullRequest: Bool { pullRequest != nil }
+
+    enum CodingKeys: String, CodingKey {
+        case number, title, body, state, labels
+        case htmlURL = "html_url"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case pullRequest = "pull_request"
+    }
+}
+
 struct GitHubAPIClient {
     private let baseURL = "https://api.github.com"
 
@@ -126,6 +150,13 @@ struct GitHubAPIClient {
     func fetchLabels(owner: String, repo: String) async throws -> [GitHubLabel] {
         let (data, _) = try await makeRequest("/repos/\(owner)/\(repo)/labels?per_page=100")
         return try JSONDecoder().decode([GitHubLabel].self, from: data)
+    }
+
+    func fetchIssues(owner: String, repo: String, state: String = "all", page: Int = 1) async throws -> [GitHubIssueDetail] {
+        let (data, _) = try await makeRequest("/repos/\(owner)/\(repo)/issues?state=\(state)&per_page=100&page=\(page)")
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode([GitHubIssueDetail].self, from: data)
     }
 
     enum APIError: LocalizedError {

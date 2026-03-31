@@ -7,6 +7,7 @@ import Observation
 class SyncService {
     private let apiClient = GitHubAPIClient()
     var isSyncing = false
+    var isImporting = false
 
     func syncMemo(_ memo: Memo, account: GitHubAccount, context: ModelContext) async {
         guard account.isLinked, account.hasRepository else { return }
@@ -166,6 +167,87 @@ class SyncService {
             memo.syncError = "[transfer] " + error.localizedDescription
             do { try context.save() } catch { print("[QuickMemo] Failed to save failed status: \(error)") }
         }
+    }
+
+    // Fetches all issues from the linked GitHub repository and imports any
+    // that do not already exist locally as Memos.
+    func fetchAndImportIssues(account: GitHubAccount, context: ModelContext) async {
+        guard account.isLinked, account.hasRepository else { return }
+        guard !isImporting else { return }
+
+        isImporting = true
+        defer { isImporting = false }
+
+        let owner = account.repositoryOwner
+        let repo = account.repositoryName
+
+        let existingDescriptor = FetchDescriptor<Memo>(
+            predicate: #Predicate<Memo> { memo in
+                memo.repositoryOwner == owner && memo.repositoryName == repo
+            }
+        )
+        let existingMemos = (try? context.fetch(existingDescriptor)) ?? []
+        let existingNumbers = Set(existingMemos.compactMap(\.githubIssueNumber))
+
+        var page = 1
+        while true {
+            let issues: [GitHubIssueDetail]
+            do {
+                issues = try await apiClient.fetchIssues(owner: owner, repo: repo, state: "all", page: page)
+            } catch {
+                print("[QuickMemo] Failed to fetch issues page \(page): \(error)")
+                break
+            }
+
+            if issues.isEmpty { break }
+
+            for issue in issues {
+                guard !issue.isPullRequest else { continue }
+                guard !existingNumbers.contains(issue.number) else { continue }
+
+                let labelIDs = resolveOrCreateLabels(for: issue.labels, context: context)
+                let memo = Memo(
+                    title: issue.title,
+                    body: issue.body.flatMap { $0.isEmpty ? nil : $0 },
+                    status: issue.state == "open" ? .open : .closed,
+                    createdAt: issue.createdAt,
+                    updatedAt: issue.updatedAt,
+                    githubIssueNumber: issue.number,
+                    githubIssueURL: issue.htmlURL,
+                    syncStatus: .synced,
+                    lastSyncedAt: Date(),
+                    labelIDs: labelIDs,
+                    repositoryOwner: owner,
+                    repositoryName: repo
+                )
+                context.insert(memo)
+            }
+
+            do { try context.save() } catch { print("[QuickMemo] Failed to save imported issues: \(error)") }
+
+            if issues.count < 100 { break }
+            page += 1
+        }
+    }
+
+    private func resolveOrCreateLabels(for githubLabels: [GitHubLabel], context: ModelContext) -> [UUID] {
+        guard !githubLabels.isEmpty else { return [] }
+
+        let allLabelsDescriptor = FetchDescriptor<Label>()
+        let existingLabels = (try? context.fetch(allLabelsDescriptor)) ?? []
+        let existingByGithubID = Dictionary(uniqueKeysWithValues: existingLabels.map { ($0.githubID, $0) })
+
+        var uuids: [UUID] = []
+        for gh in githubLabels {
+            if let existing = existingByGithubID[gh.id] {
+                uuids.append(existing.id)
+            } else {
+                let label = Label(githubID: gh.id, name: gh.name, color: gh.color)
+                context.insert(label)
+                uuids.append(label.id)
+            }
+        }
+        return uuids
     }
 
     private func fetchLabelNames(for memo: Memo, context: ModelContext) -> [String] {
