@@ -91,6 +91,11 @@ struct MemoDetailView: View {
                 .onChange(of: selectedLabelIDs) { _, newValue in
                     memo.labelIDs = newValue
                     try? modelContext.save()
+                    if gitHubAccount.isLinked, gitHubAccount.hasRepository {
+                        Task {
+                            await syncService.syncMemo(memo, account: gitHubAccount, context: modelContext)
+                        }
+                    }
                 }
         }
     }

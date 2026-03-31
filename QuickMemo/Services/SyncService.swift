@@ -32,14 +32,13 @@ class SyncService {
                 )
                 memo.githubIssueURL = issue.htmlURL
 
-                if !labelNames.isEmpty {
-                    try await apiClient.setIssueLabels(
-                        owner: owner,
-                        repo: repo,
-                        number: issueNumber,
-                        labels: labelNames
-                    )
-                }
+                // Always sync labels (including empty array to clear all labels)
+                try await apiClient.setIssueLabels(
+                    owner: owner,
+                    repo: repo,
+                    number: issueNumber,
+                    labels: labelNames
+                )
             } else {
                 let issue = try await apiClient.createIssue(
                     owner: owner,
@@ -150,15 +149,13 @@ class SyncService {
             memo.syncError = nil
             memo.lastSyncedAt = Date()
 
-            // Best-effort label setting
-            if !labelNames.isEmpty {
-                try? await apiClient.setIssueLabels(
-                    owner: newOwner,
-                    repo: newRepo,
-                    number: newIssue.number,
-                    labels: labelNames
-                )
-            }
+            // Best-effort label setting (including empty to clear labels)
+            try? await apiClient.setIssueLabels(
+                owner: newOwner,
+                repo: newRepo,
+                number: newIssue.number,
+                labels: labelNames
+            )
 
             do { try context.save() } catch { print("[QuickMemo] Failed to save after transfer: \(error)") }
         } catch {
