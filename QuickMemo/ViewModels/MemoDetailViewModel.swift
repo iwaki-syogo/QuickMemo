@@ -13,6 +13,7 @@ class MemoDetailViewModel {
     private var modelContext: ModelContext?
 
     func setMemo(_ memo: Memo, context: ModelContext) {
+        guard self.memo == nil else { return }
         self.memo = memo
         self.modelContext = context
         self.title = memo.title

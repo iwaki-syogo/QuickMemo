@@ -77,6 +77,7 @@ struct MemoDetailView: View {
                     currentRepo: memo.repositoryName ?? gitHubAccount.repositoryName
                 ) { newOwner, newRepo in
                     isTransferring = true
+                    viewModel.save()
                     Task {
                         await syncService.transferMemo(memo, toOwner: newOwner, repoName: newRepo, account: gitHubAccount, context: modelContext)
                         isTransferring = false
@@ -90,6 +91,7 @@ struct MemoDetailView: View {
                 .presentationDetents([.medium])
                 .onChange(of: selectedLabelIDs) { _, newValue in
                     memo.labelIDs = newValue
+                    viewModel.save()
                     try? modelContext.save()
                     if gitHubAccount.isLinked, gitHubAccount.hasRepository {
                         Task {
