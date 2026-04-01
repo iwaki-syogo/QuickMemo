@@ -17,6 +17,10 @@ enum MemoFilters {
     static func closed(_ memos: [Memo]) -> [Memo] {
         memos.filter { !$0.isPinned && $0.status == .closed }
     }
+
+    static func scoped(_ memos: [Memo], owner: String, repository: String) -> [Memo] {
+        return [] // Stub: always returns empty — Implementer will provide real logic
+    }
 }
 
 /// Determines whether the unsynced indicator (blue dot) should be shown
