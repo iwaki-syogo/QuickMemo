@@ -176,12 +176,11 @@ class SyncService {
         let repo = account.repositoryName
 
         do {
-            let issues = try await apiClient.fetchIssues(owner: owner, repo: repo, state: "open")
+            // Fetch all issues (open + closed) to detect merged status
+            let issues = try await apiClient.fetchIssues(owner: owner, repo: repo, state: "all")
 
-            // Fetch existing issue numbers to avoid duplicates
             let descriptor = FetchDescriptor<Memo>()
             let existingMemos = (try? context.fetch(descriptor)) ?? []
-            let existingIssueNumbers = Set(existingMemos.compactMap(\.githubIssueNumber))
 
             // Fetch all local labels for matching
             let labelDescriptor = FetchDescriptor<Label>()
@@ -190,12 +189,25 @@ class SyncService {
             for issue in issues {
                 // Skip pull requests (GitHub Issues API includes PRs — PRs have /pull/ in URL)
                 guard issue.htmlURL.contains("/issues/") else { continue }
-                guard !existingIssueNumbers.contains(issue.number) else { continue }
+
+                let newStatus = memoStatus(from: issue)
+
+                // Update existing memo's status
+                if let existingMemo = existingMemos.first(where: { $0.githubIssueNumber == issue.number }) {
+                    if existingMemo.status != newStatus {
+                        existingMemo.status = newStatus
+                        existingMemo.updatedAt = Date()
+                    }
+                    continue
+                }
+
+                // Only import new open issues (skip old closed/merged issues)
+                guard issue.state == "open" else { continue }
 
                 let memo = Memo(
                     title: issue.title,
                     body: issue.body,
-                    status: issue.state == "open" ? .open : .closed,
+                    status: newStatus,
                     githubIssueNumber: issue.number,
                     githubIssueURL: issue.htmlURL,
                     syncStatus: .synced,
@@ -219,6 +231,16 @@ class SyncService {
         } catch {
             print("[QuickMemo] Failed to import issues: \(error)")
         }
+    }
+
+    private func memoStatus(from issue: GitHubIssue) -> MemoStatus {
+        if issue.state == "open" {
+            return .open
+        }
+        if issue.stateReason == "completed" {
+            return .merged
+        }
+        return .closed
     }
 
     private func fetchLabelNames(for memo: Memo, context: ModelContext) -> [String] {

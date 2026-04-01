@@ -40,6 +40,7 @@ struct GitHubIssue: Codable {
     let number: Int
     let htmlURL: String
     let state: String
+    let stateReason: String?
     let title: String
     let body: String?
     let labels: [GitHubLabel]?
@@ -47,6 +48,7 @@ struct GitHubIssue: Codable {
     enum CodingKeys: String, CodingKey {
         case number, state, title, body, labels
         case htmlURL = "html_url"
+        case stateReason = "state_reason"
     }
 }
 

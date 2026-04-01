@@ -41,10 +41,30 @@ struct MemoRowView: View {
 
             Spacer()
 
-            if memo.isPinned {
-                Image(systemName: "pin.fill")
-                    .font(.caption)
-                    .foregroundStyle(.orange)
+            VStack(spacing: 4) {
+                if memo.isPinned {
+                    Image(systemName: "pin.fill")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
+
+                if memo.status == .merged {
+                    HStack(spacing: 2) {
+                        Image(systemName: "arrow.triangle.merge")
+                            .font(.caption2)
+                        Text("マージ済み")
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(.purple)
+                } else if memo.status == .closed {
+                    HStack(spacing: 2) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.caption2)
+                        Text("クローズ")
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(.secondary)
+                }
             }
         }
         .padding(.vertical, 2)
