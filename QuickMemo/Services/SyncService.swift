@@ -32,6 +32,8 @@ class SyncService {
                     state: state
                 )
                 memo.githubIssueURL = issue.htmlURL
+                memo.repositoryOwner = owner
+                memo.repositoryName = repo
 
                 // Always sync labels (including empty array to clear all labels)
                 try await apiClient.setIssueLabels(
@@ -50,6 +52,8 @@ class SyncService {
                 )
                 memo.githubIssueNumber = issue.number
                 memo.githubIssueURL = issue.htmlURL
+                memo.repositoryOwner = owner
+                memo.repositoryName = repo
             }
 
             memo.syncStatus = .synced
@@ -189,7 +193,7 @@ class SyncService {
         while true {
             let issues: [GitHubIssueDetail]
             do {
-                issues = try await apiClient.fetchIssues(owner: owner, repo: repo, state: "all", page: page)
+                issues = try await apiClient.fetchIssueDetails(owner: owner, repo: repo, state: "all", page: page)
             } catch {
                 print("[QuickMemo] Failed to fetch issues page \(page): \(error)")
                 break
