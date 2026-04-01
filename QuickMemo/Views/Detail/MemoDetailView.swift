@@ -112,6 +112,7 @@ struct MemoDetailView: View {
                 Spacer()
 
                 Button {
+                    viewModel.save()
                     showLabelPicker = true
                 } label: {
                     Image(systemName: "pencil")
@@ -261,6 +262,7 @@ struct MemoDetailView: View {
                     }
                 } else {
                     Button {
+                        viewModel.save()
                         showTransferPicker = true
                     } label: {
                         HStack {
