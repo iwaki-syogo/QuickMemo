@@ -141,7 +141,7 @@ struct MemoListView: View {
         .listStyle(.insetGrouped)
         .refreshable {
             if gitHubAccount.isLinked {
-                await syncService.importIssues(account: gitHubAccount, context: modelContext)
+                await syncService.fetchAndImportIssues(account: gitHubAccount, context: modelContext)
             }
         }
         .sheet(item: $labelPickerMemo) { memo in
