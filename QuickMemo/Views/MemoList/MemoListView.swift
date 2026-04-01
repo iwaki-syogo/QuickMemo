@@ -156,12 +156,6 @@ struct MemoListView: View {
             }
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(role: .destructive) {
-                deleteMemo(memo)
-            } label: {
-                SwiftUI.Label("削除", systemImage: "trash")
-            }
-
             if memo.status == .open {
                 Button {
                     toggleStatus(memo)
@@ -214,15 +208,6 @@ struct MemoListView: View {
             try modelContext.save()
         } catch {
             print("[QuickMemo] Failed to save after toggleStatus: \(error)")
-        }
-    }
-
-    private func deleteMemo(_ memo: Memo) {
-        modelContext.delete(memo)
-        do {
-            try modelContext.save()
-        } catch {
-            print("[QuickMemo] Failed to save after deleteMemo: \(error)")
         }
     }
 
