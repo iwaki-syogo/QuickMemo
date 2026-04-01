@@ -20,7 +20,6 @@ struct MemoListView: View {
 
     private var pinnedMemos: [Memo] { MemoFilters.pinned(scopedMemos) }
     private var openMemos: [Memo] { MemoFilters.open(scopedMemos) }
-    private var mergedMemos: [Memo] { MemoFilters.merged(scopedMemos) }
     private var closedMemos: [Memo] { MemoFilters.closed(scopedMemos) }
 
     var body: some View {
@@ -93,14 +92,6 @@ struct MemoListView: View {
             if !openMemos.isEmpty {
                 Section("オープン") {
                     ForEach(openMemos, id: \.id) { memo in
-                        memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
-                    }
-                }
-            }
-
-            if !mergedMemos.isEmpty {
-                Section("マージ") {
-                    ForEach(mergedMemos, id: \.id) { memo in
                         memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                     }
                 }
