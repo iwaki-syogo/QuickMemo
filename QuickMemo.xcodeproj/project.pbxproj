@@ -15,7 +15,9 @@
 		2A3DBE9E16E9C993825D9C01 /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E203CF13D5F1400AD0309F /* MemoListViewModel.swift */; };
 		3250C0B5CBCD679A30F0A9F3 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33359F3FCB95AF8E8F8F4111 /* DeepLinkHandler.swift */; };
 		33608C46982B5D0723BCE4E4 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F7F2B36E5F8DCBB2EF0EC6 /* DateFormatting.swift */; };
+		3BF96C7CE3B901AFFD18163A /* InputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35470DEA53D182C53965507 /* InputViewModelTests.swift */; };
 		42A047922F9BD3F764F67206 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282579A74F28FA7101EF1DA /* Label.swift */; };
+		4F25883034C44137F30B0E15 /* MemoSyncIndicatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93C49A7A4614D62976A040 /* MemoSyncIndicatorTests.swift */; };
 		535BCE467626BDC93482B53A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BE4A02F21412AA52C3FAD /* Constants.swift */; };
 		59E5D28355683752E3120A6D /* TransferRepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */; };
 		6C17F722CB21C76A3CDB449A /* QuickMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC9B9B3C2A8E6D92E29926 /* QuickMemoApp.swift */; };
@@ -28,6 +30,7 @@
 		9A35CAE3EAB0AA0D160600DA /* RepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37577AD14F9052C90F3AE2F6 /* RepositoryPickerView.swift */; };
 		9AB9D72F55FA292D52C6C910 /* QuickMemo.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */; };
 		9F17AC3903F5AD305571F906 /* project_widget.yml in Resources */ = {isa = PBXBuildFile; fileRef = 253F84F8BF88A90A7224F334 /* project_widget.yml */; };
+		A4E840E971ED08CA12CDE04C /* MemoFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908474DC77E8885AC9837F69 /* MemoFilters.swift */; };
 		A9C72CC711589E85DB988E70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF7D4EB6912842BB1981A0 /* ContentView.swift */; };
 		C47E0706227FD2506ECA7B4D /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */; };
 		C82FAF5B729242640E8DF870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A340E62F39DBB68D7FB3B /* Assets.xcassets */; };
@@ -37,9 +40,11 @@
 		D31E9C199194825B6DE352BD /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81626B18BC5FE2053C8DAB /* MemoDetailView.swift */; };
 		D4DBC2D0F3E713A9ED5E617E /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */; };
 		D69B543A9F6CFFE0E06F7B10 /* LabelPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCCAE224F87B12539937132 /* LabelPickerSheet.swift */; };
+		D8C91005D43E37E8ACFD701E /* InputRepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C7EF7D1F559282905EFC6 /* InputRepositoryPickerView.swift */; };
 		E2AA22A7DBA80A382CB83436 /* MemoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC02A76A90C2D6B2BE8E18A /* MemoDetailViewModel.swift */; };
 		E862AC072845C891DDD44851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F625160ECC11343FFB27A7 /* Assets.xcassets */; };
 		EA06FF98A1CE452C0C0591C0 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67CA81AEDCD6882CCD2A8C /* InputViewModel.swift */; };
+		F4626E9EB236F7EED1B745A2 /* MemoListGroupingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571BB6D7164B003453A20921 /* MemoListGroupingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 092EDF75A87C34E86DD2B76B;
 			remoteInfo = QuickMemoWidget;
+		};
+		C95CE13E84E882B3BB8A86D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5586A076A58D4E1DEF929CF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C3911CF21E666F62548750B3;
+			remoteInfo = QuickMemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -80,6 +92,7 @@
 		3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		3C8272E7653491BA97D78E53 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
 		43F625160ECC11343FFB27A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		571BB6D7164B003453A20921 /* MemoListGroupingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListGroupingTests.swift; sourceTree = "<group>"; };
 		613BBD69092FBFF45F02BCEC /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
 		61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickMemoWidget.swift; sourceTree = "<group>"; };
 		6D16F0056F2CAC69CA88FB22 /* QuickMemoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = QuickMemoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,13 +101,18 @@
 		79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */ = {isa = PBXFileReference; path = QuickMemo.storekit; sourceTree = "<group>"; };
 		8F9423803E9E638A864F33DF /* GitHubAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAccount.swift; sourceTree = "<group>"; };
 		8FB576F5EBC47DF5A29F7240 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		905C7EF7D1F559282905EFC6 /* InputRepositoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRepositoryPickerView.swift; sourceTree = "<group>"; };
+		908474DC77E8885AC9837F69 /* MemoFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoFilters.swift; sourceTree = "<group>"; };
 		91E203CF13D5F1400AD0309F /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
 		A282579A74F28FA7101EF1DA /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAFA311DD144868B547DB512 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryPickerView.swift; sourceTree = "<group>"; };
+		BB93C49A7A4614D62976A040 /* MemoSyncIndicatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSyncIndicatorTests.swift; sourceTree = "<group>"; };
 		BBCCAE224F87B12539937132 /* LabelPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPickerSheet.swift; sourceTree = "<group>"; };
 		BC67CA81AEDCD6882CCD2A8C /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		BCC02A76A90C2D6B2BE8E18A /* MemoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewModel.swift; sourceTree = "<group>"; };
+		BDF7FF1353FF5310412E446C /* QuickMemoTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = QuickMemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35470DEA53D182C53965507 /* InputViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModelTests.swift; sourceTree = "<group>"; };
 		C37A5F4BDF1F8F5407C1844A /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
 		C5DA8478FA9EB9475D93F320 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		CB9BE4A02F21412AA52C3FAD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -121,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				AF1B0283E67D611BCC74D5AC /* QuickMemo */,
+				E9F0B43F444C5F6799380D3F /* QuickMemoTests */,
 				E448FE9D63347D2243403494 /* QuickMemoWidget */,
 				6ABA4996813D4CE3144B5BCD /* Products */,
 			);
@@ -158,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0917CE0C01D6B8D4D44DDF /* QuickMemo.app */,
+				BDF7FF1353FF5310412E446C /* QuickMemoTests.xctest */,
 				6D16F0056F2CAC69CA88FB22 /* QuickMemoWidget.appex */,
 			);
 			name = Products;
@@ -214,6 +234,7 @@
 			children = (
 				E31C09A401DD6D3813F789F8 /* Info.plist */,
 				318BE1B8EBB8C0E9F3A6EB54 /* App */,
+				C043022536DBDC2D0E75B333 /* Helpers */,
 				84B62CC17183DA1F9513F084 /* Models */,
 				C90C1299A80B6E7C4FA9A678 /* Resources */,
 				F2B7292BF736A4684776BF8E /* Services */,
@@ -237,6 +258,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C043022536DBDC2D0E75B333 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				908474DC77E8885AC9837F69 /* MemoFilters.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C90C1299A80B6E7C4FA9A678 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +277,7 @@
 		D869FC2B334CEA75FDA88F05 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				905C7EF7D1F559282905EFC6 /* InputRepositoryPickerView.swift */,
 				AAFA311DD144868B547DB512 /* InputView.swift */,
 			);
 			path = Input;
@@ -264,6 +294,16 @@
 				F132AD177E6B4DB3E9DE1CDF /* QuickMemoWidgetBundle.swift */,
 			);
 			path = QuickMemoWidget;
+			sourceTree = "<group>";
+		};
+		E9F0B43F444C5F6799380D3F /* QuickMemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				C35470DEA53D182C53965507 /* InputViewModelTests.swift */,
+				571BB6D7164B003453A20921 /* MemoListGroupingTests.swift */,
+				BB93C49A7A4614D62976A040 /* MemoSyncIndicatorTests.swift */,
+			);
+			path = QuickMemoTests;
 			sourceTree = "<group>";
 		};
 		EB3779941360AC7536A5260A /* Utilities */ = {
@@ -308,6 +348,24 @@
 			productReference = 6D16F0056F2CAC69CA88FB22 /* QuickMemoWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		84EABE85CF4247058344C608 /* QuickMemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F221D85225A0A7B3E5C6BD55 /* Build configuration list for PBXNativeTarget "QuickMemoTests" */;
+			buildPhases = (
+				5129A08D63BC7C4BBB41679F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FECA5FFD08425583565BDA86 /* PBXTargetDependency */,
+			);
+			name = QuickMemoTests;
+			packageProductDependencies = (
+			);
+			productName = QuickMemoTests;
+			productReference = BDF7FF1353FF5310412E446C /* QuickMemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C3911CF21E666F62548750B3 /* QuickMemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AAFD49FCC0F7D93F7D1390A /* Build configuration list for PBXNativeTarget "QuickMemo" */;
@@ -342,6 +400,9 @@
 					092EDF75A87C34E86DD2B76B = {
 						DevelopmentTeam = 9SVPJ6X69X;
 					};
+					84EABE85CF4247058344C608 = {
+						DevelopmentTeam = 9SVPJ6X69X;
+					};
 					C3911CF21E666F62548750B3 = {
 						DevelopmentTeam = 9SVPJ6X69X;
 					};
@@ -365,6 +426,7 @@
 			projectRoot = "";
 			targets = (
 				C3911CF21E666F62548750B3 /* QuickMemo */,
+				84EABE85CF4247058344C608 /* QuickMemoTests */,
 				092EDF75A87C34E86DD2B76B /* QuickMemoWidget */,
 			);
 		};
@@ -392,6 +454,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5129A08D63BC7C4BBB41679F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BF96C7CE3B901AFFD18163A /* InputViewModelTests.swift in Sources */,
+				F4626E9EB236F7EED1B745A2 /* MemoListGroupingTests.swift in Sources */,
+				4F25883034C44137F30B0E15 /* MemoSyncIndicatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC04E7A49B666A3F0942D11F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,6 +476,7 @@
 				C47E0706227FD2506ECA7B4D /* GitHubAPIClient.swift in Sources */,
 				81AA55ACACF637168BEC7C4F /* GitHubAccount.swift in Sources */,
 				1716D3F6CD53007FCA4D8B7D /* GitHubAuthService.swift in Sources */,
+				D8C91005D43E37E8ACFD701E /* InputRepositoryPickerView.swift in Sources */,
 				77E5FD064ACE44E5CF8E499C /* InputView.swift in Sources */,
 				EA06FF98A1CE452C0C0591C0 /* InputViewModel.swift in Sources */,
 				7AA98FED90466235459B7390 /* KeychainService.swift in Sources */,
@@ -412,6 +485,7 @@
 				18581C0EC9BA1B94F6CF47C9 /* Memo.swift in Sources */,
 				D31E9C199194825B6DE352BD /* MemoDetailView.swift in Sources */,
 				E2AA22A7DBA80A382CB83436 /* MemoDetailViewModel.swift in Sources */,
+				A4E840E971ED08CA12CDE04C /* MemoFilters.swift in Sources */,
 				0C2CCABD35BDF5D68B78EF61 /* MemoListView.swift in Sources */,
 				2A3DBE9E16E9C993825D9C01 /* MemoListViewModel.swift in Sources */,
 				8AA8C1E0052D6C5EE0859655 /* MemoRowView.swift in Sources */,
@@ -441,9 +515,31 @@
 			target = 092EDF75A87C34E86DD2B76B /* QuickMemoWidget */;
 			targetProxy = 1AD086C92ECF4CA1F8B00740 /* PBXContainerItemProxy */;
 		};
+		FECA5FFD08425583565BDA86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C3911CF21E666F62548750B3 /* QuickMemo */;
+			targetProxy = C95CE13E84E882B3BB8A86D4 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0800AA3332BAB3E8DF46E182 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iwakisyogo.QuickMemo.Tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickMemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickMemo";
+			};
+			name = Release;
+		};
 		0CC0B2F86075D4B4B37C9956 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -478,7 +574,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -516,7 +612,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -552,12 +648,29 @@
 			};
 			name = Debug;
 		};
+		7549D3D23C0BFEFFC9D38205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iwakisyogo.QuickMemo.Tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickMemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickMemo";
+			};
+			name = Debug;
+		};
 		8A3C4FCF3743B03005721E2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -604,7 +717,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -679,6 +792,15 @@
 			buildConfigurations = (
 				0CC0B2F86075D4B4B37C9956 /* Debug */,
 				A8EABA4CA4626B0D318E9DFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F221D85225A0A7B3E5C6BD55 /* Build configuration list for PBXNativeTarget "QuickMemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7549D3D23C0BFEFFC9D38205 /* Debug */,
+				0800AA3332BAB3E8DF46E182 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

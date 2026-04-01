@@ -11,39 +11,10 @@ struct MemoListView: View {
 
     // MARK: - Computed filters
 
-    private var pinnedMemos: [Memo] { allMemos.filter { $0.isPinned } }
-    private var otherMemos: [Memo] { allMemos.filter { !$0.isPinned } }
-
-    // MARK: - Repository grouping
-
-    private var repositoryDisplayNames: [String] {
-        var seen = Set<String>()
-        var result: [String] = []
-        for memo in allMemos where !memo.isPinned {
-            guard let owner = memo.repositoryOwner, !owner.isEmpty,
-                  let name = memo.repositoryName, !name.isEmpty else { continue }
-            let key = "\(owner)/\(name)"
-            if seen.insert(key).inserted {
-                result.append(key)
-            }
-        }
-        return result.sorted()
-    }
-
-    private func memosForRepository(_ displayName: String) -> [Memo] {
-        allMemos.filter {
-            !$0.isPinned &&
-            "\($0.repositoryOwner ?? "")/\($0.repositoryName ?? "")" == displayName
-        }
-    }
-
-    private var localMemos: [Memo] {
-        allMemos.filter {
-            !$0.isPinned &&
-            ($0.repositoryOwner == nil || $0.repositoryOwner?.isEmpty == true ||
-             $0.repositoryName == nil || $0.repositoryName?.isEmpty == true)
-        }
-    }
+    private var pinnedMemos: [Memo] { MemoFilters.pinned(allMemos) }
+    private var openMemos: [Memo] { MemoFilters.open(allMemos) }
+    private var mergedMemos: [Memo] { MemoFilters.merged(allMemos) }
+    private var closedMemos: [Memo] { MemoFilters.closed(allMemos) }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -112,28 +83,26 @@ struct MemoListView: View {
                 }
             }
 
-            if gitHubAccount.isLinked {
-                ForEach(repositoryDisplayNames, id: \.self) { repoName in
-                    Section(repoName) {
-                        ForEach(memosForRepository(repoName), id: \.id) { memo in
-                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin", showRepository: false)
-                        }
+            if !openMemos.isEmpty {
+                Section("オープン") {
+                    ForEach(openMemos, id: \.id) { memo in
+                        memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                     }
                 }
+            }
 
-                if !localMemos.isEmpty {
-                    Section("ローカル") {
-                        ForEach(localMemos, id: \.id) { memo in
-                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
-                        }
+            if !mergedMemos.isEmpty {
+                Section("マージ") {
+                    ForEach(mergedMemos, id: \.id) { memo in
+                        memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                     }
                 }
-            } else {
-                if !otherMemos.isEmpty {
-                    Section {
-                        ForEach(otherMemos, id: \.id) { memo in
-                            memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
-                        }
+            }
+
+            if !closedMemos.isEmpty {
+                Section("クローズ") {
+                    ForEach(closedMemos, id: \.id) { memo in
+                        memoNavigationLink(memo: memo, pinAction: "ピン留め", pinIcon: "pin")
                     }
                 }
             }
@@ -162,12 +131,12 @@ struct MemoListView: View {
 
     @State private var labelPickerMemo: Memo?
 
-    private func memoNavigationLink(memo: Memo, pinAction: String, pinIcon: String, showRepository: Bool = true) -> some View {
+    private func memoNavigationLink(memo: Memo, pinAction: String, pinIcon: String) -> some View {
         NavigationLink {
             MemoDetailView(memo: memo)
         } label: {
             HStack {
-                MemoRowView(memo: memo, labels: labelsForMemo(memo), showRepository: showRepository)
+                MemoRowView(memo: memo, labels: labelsForMemo(memo), isGitHubLinked: gitHubAccount.isLinked)
 
                 if memo.syncStatus == .failed {
                     Image(systemName: "exclamationmark.triangle")

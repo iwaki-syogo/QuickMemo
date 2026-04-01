@@ -9,7 +9,7 @@ settings:
     SWIFT_VERSION: "5"
     DEVELOPMENT_TEAM: 9SVPJ6X69X
     GENERATE_INFOPLIST_FILE: YES
-    CURRENT_PROJECT_VERSION: 12
+    CURRENT_PROJECT_VERSION: 13
     MARKETING_VERSION: 1.0.0
 packages:
   GoogleMobileAds:
@@ -59,10 +59,24 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo.Widget
         INFOPLIST_KEY_CFBundleDisplayName: Issuepad Widget
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
-        CURRENT_PROJECT_VERSION: 12
+        CURRENT_PROJECT_VERSION: 13
         MARKETING_VERSION: 1.0.0
         SKIP_INSTALL: YES
         ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME: WidgetBackground
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../../Frameworks"
     entitlements:
       path: QuickMemoWidget/QuickMemoWidget.entitlements
+
+  QuickMemoTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - QuickMemoTests
+    dependencies:
+      - target: QuickMemo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.iwakisyogo.QuickMemo.Tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/QuickMemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickMemo"
+        BUNDLE_LOADER: "$(TEST_HOST)"

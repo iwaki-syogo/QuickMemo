@@ -26,6 +26,15 @@ xcodegen generate && xcodebuild build -scheme QuickMemo
 ## Known Issues / Gotchas
 - **SwiftUI.Label vs Models.Label**: The app has a `Label` model that conflicts with `SwiftUI.Label`. Always use explicit module prefixes when both are in scope (e.g., `QuickMemo.Label` for the model).
 
+## Test
+```bash
+xcodegen generate && xcodebuild test -scheme QuickMemo -destination 'platform=iOS Simulator,name=iPhone 16'
+```
+
+## Orchestra Rules
+- Before creating task.md, review all pending user requests to ensure nothing is missed
+- Items in "やらないこと" section must be confirmed with the user before exclusion
+
 ## Conventions
 - Code comments and commit messages in English
 - UI strings: Japanese (primary) + English localizations

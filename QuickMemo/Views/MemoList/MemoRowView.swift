@@ -4,9 +4,15 @@ struct MemoRowView: View {
     let memo: Memo
     var labels: [Label] = []
     var showRepository: Bool = true
+    var isGitHubLinked: Bool = false
 
     var body: some View {
         HStack {
+            if SyncIndicator.shouldShow(syncStatus: memo.syncStatus, isGitHubLinked: isGitHubLinked) {
+                Circle()
+                    .fill(.blue)
+                    .frame(width: 8, height: 8)
+            }
             VStack(alignment: .leading, spacing: 4) {
                 Text(memo.title)
                     .font(.body)

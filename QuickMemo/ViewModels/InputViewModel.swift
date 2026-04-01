@@ -10,6 +10,9 @@ private let logger = Logger(subsystem: "com.iwakisyogo.QuickMemo", category: "In
 class InputViewModel {
     var title: String = ""
     var body: String = ""
+    var selectedLabelIDs: [UUID] = []
+    var repositoryOwner: String?
+    var repositoryName: String?
 
     private var modelContext: ModelContext?
     private var hasSaved = false
@@ -17,6 +20,13 @@ class InputViewModel {
 
     func setModelContext(_ context: ModelContext) {
         self.modelContext = context
+    }
+
+    func setDefaults(from account: GitHubAccount) {
+        if account.isLinked, account.hasRepository {
+            repositoryOwner = account.repositoryOwner
+            repositoryName = account.repositoryName
+        }
     }
 
     func save() {
@@ -27,7 +37,10 @@ class InputViewModel {
 
         let memo = Memo(
             title: title.trimmingCharacters(in: .whitespacesAndNewlines),
-            body: body.isEmpty ? nil : body
+            body: body.isEmpty ? nil : body,
+            labelIDs: selectedLabelIDs,
+            repositoryOwner: repositoryOwner,
+            repositoryName: repositoryName
         )
         modelContext.insert(memo)
         do {
