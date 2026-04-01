@@ -16,7 +16,7 @@ class MemoListViewModel {
         self.modelContext = context
     }
 
-    func fetchMemos(isGitHubLinked: Bool = false) {
+    func fetchMemos(isGitHubLinked: Bool = false, owner: String? = nil, repository: String? = nil) {
         guard let modelContext else { return }
 
         let descriptor = FetchDescriptor<Memo>(
@@ -24,7 +24,12 @@ class MemoListViewModel {
         )
 
         do {
-            let allMemos = try modelContext.fetch(descriptor)
+            var allMemos = try modelContext.fetch(descriptor)
+
+            if let owner, let repository {
+                allMemos = MemoFilters.scoped(allMemos, owner: owner, repository: repository)
+            }
+
             pinnedMemos = allMemos.filter { $0.isPinned }
 
             if isGitHubLinked {
