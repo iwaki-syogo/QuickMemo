@@ -171,6 +171,10 @@ struct GitHubAPIClient {
         return try decoder.decode([GitHubIssueDetail].self, from: data)
     }
 
+    func fetchIssueDetails(owner: String, repo: String, state: String = "all", page: Int = 1) async throws -> [GitHubIssueDetail] {
+        fatalError("Not implemented — stub for TDD")
+    }
+
     enum APIError: LocalizedError {
         case unauthorized
         case rateLimited
