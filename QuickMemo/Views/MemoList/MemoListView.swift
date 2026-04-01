@@ -72,6 +72,16 @@ struct MemoListView: View {
                 Task {
                     await syncService.retryFailedAndPending(account: gitHubAccount, context: modelContext)
                 }
+                Task {
+                    await syncService.fetchAndImportIssues(account: gitHubAccount, context: modelContext)
+                }
+            }
+        }
+        .onChange(of: gitHubAccount.repositoryName) { _, _ in
+            if gitHubAccount.isLinked, gitHubAccount.hasRepository {
+                Task {
+                    await syncService.fetchAndImportIssues(account: gitHubAccount, context: modelContext)
+                }
             }
         }
     }
