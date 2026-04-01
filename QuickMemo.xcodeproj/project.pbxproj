@@ -19,12 +19,14 @@
 		42A047922F9BD3F764F67206 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282579A74F28FA7101EF1DA /* Label.swift */; };
 		4F25883034C44137F30B0E15 /* MemoSyncIndicatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93C49A7A4614D62976A040 /* MemoSyncIndicatorTests.swift */; };
 		535BCE467626BDC93482B53A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BE4A02F21412AA52C3FAD /* Constants.swift */; };
+		58E894A9B32591DBEE25503A /* SyncServiceWritebackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1EA3E0A03389070097EFBA /* SyncServiceWritebackTests.swift */; };
 		59E5D28355683752E3120A6D /* TransferRepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B196B156ADDD6D6EC2D3BAE7 /* TransferRepositoryPickerView.swift */; };
 		6C17F722CB21C76A3CDB449A /* QuickMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC9B9B3C2A8E6D92E29926 /* QuickMemoApp.swift */; };
 		6DE1601570B7E5C25A5BA4B5 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006B0173479E71468490B328 /* SyncService.swift */; };
 		77E5FD064ACE44E5CF8E499C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFA311DD144868B547DB512 /* InputView.swift */; };
 		7AA98FED90466235459B7390 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38ACE985351C32FBD1EF517 /* KeychainService.swift */; };
 		81AA55ACACF637168BEC7C4F /* GitHubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9423803E9E638A864F33DF /* GitHubAccount.swift */; };
+		81F24DC0E4DEBE66A2FB7D82 /* MemoListScopeIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF7E647E16D48215DF62FB /* MemoListScopeIntegrationTests.swift */; };
 		83C334EA1E61B654F94CD1AD /* QuickMemoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A7D0FC79D3A84B84787AD3 /* QuickMemoWidget.swift */; };
 		8AA8C1E0052D6C5EE0859655 /* MemoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE7C4EC3F7376C9B93D5C4 /* MemoRowView.swift */; };
 		9A35CAE3EAB0AA0D160600DA /* RepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37577AD14F9052C90F3AE2F6 /* RepositoryPickerView.swift */; };
@@ -39,6 +41,7 @@
 		D19C26BC0400EBE10B81B0D1 /* QuickMemoWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132AD177E6B4DB3E9DE1CDF /* QuickMemoWidgetBundle.swift */; };
 		D31E9C199194825B6DE352BD /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81626B18BC5FE2053C8DAB /* MemoDetailView.swift */; };
 		D4DBC2D0F3E713A9ED5E617E /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB590057B2B939FDC3B1F73 /* AdBannerView.swift */; };
+		D55F4B3107AE8D7A2DE91B89 /* MemoFiltersScopedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D294973350A03998CFCDD5 /* MemoFiltersScopedTests.swift */; };
 		D69B543A9F6CFFE0E06F7B10 /* LabelPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCCAE224F87B12539937132 /* LabelPickerSheet.swift */; };
 		D8C91005D43E37E8ACFD701E /* InputRepositoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C7EF7D1F559282905EFC6 /* InputRepositoryPickerView.swift */; };
 		E2AA22A7DBA80A382CB83436 /* MemoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC02A76A90C2D6B2BE8E18A /* MemoDetailViewModel.swift */; };
@@ -99,6 +102,9 @@
 		6E0917CE0C01D6B8D4D44DDF /* QuickMemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QuickMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D6AC7B866626AD26839642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		79E77FE8D05D484999D67BC3 /* QuickMemo.storekit */ = {isa = PBXFileReference; path = QuickMemo.storekit; sourceTree = "<group>"; };
+		7E1EA3E0A03389070097EFBA /* SyncServiceWritebackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncServiceWritebackTests.swift; sourceTree = "<group>"; };
+		81D294973350A03998CFCDD5 /* MemoFiltersScopedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoFiltersScopedTests.swift; sourceTree = "<group>"; };
+		8EDF7E647E16D48215DF62FB /* MemoListScopeIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListScopeIntegrationTests.swift; sourceTree = "<group>"; };
 		8F9423803E9E638A864F33DF /* GitHubAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAccount.swift; sourceTree = "<group>"; };
 		8FB576F5EBC47DF5A29F7240 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		905C7EF7D1F559282905EFC6 /* InputRepositoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputRepositoryPickerView.swift; sourceTree = "<group>"; };
@@ -300,8 +306,11 @@
 			isa = PBXGroup;
 			children = (
 				C35470DEA53D182C53965507 /* InputViewModelTests.swift */,
+				81D294973350A03998CFCDD5 /* MemoFiltersScopedTests.swift */,
 				571BB6D7164B003453A20921 /* MemoListGroupingTests.swift */,
+				8EDF7E647E16D48215DF62FB /* MemoListScopeIntegrationTests.swift */,
 				BB93C49A7A4614D62976A040 /* MemoSyncIndicatorTests.swift */,
+				7E1EA3E0A03389070097EFBA /* SyncServiceWritebackTests.swift */,
 			);
 			path = QuickMemoTests;
 			sourceTree = "<group>";
@@ -459,8 +468,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF96C7CE3B901AFFD18163A /* InputViewModelTests.swift in Sources */,
+				D55F4B3107AE8D7A2DE91B89 /* MemoFiltersScopedTests.swift in Sources */,
 				F4626E9EB236F7EED1B745A2 /* MemoListGroupingTests.swift in Sources */,
+				81F24DC0E4DEBE66A2FB7D82 /* MemoListScopeIntegrationTests.swift in Sources */,
 				4F25883034C44137F30B0E15 /* MemoSyncIndicatorTests.swift in Sources */,
+				58E894A9B32591DBEE25503A /* SyncServiceWritebackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +586,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -612,7 +624,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -670,7 +682,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = QuickMemoWidget/QuickMemoWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				INFOPLIST_FILE = QuickMemoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Issuepad Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -717,7 +729,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9SVPJ6X69X;
 				ENABLE_NS_ASSERTIONS = NO;
