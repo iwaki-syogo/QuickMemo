@@ -19,7 +19,10 @@ enum MemoFilters {
     }
 
     static func scoped(_ memos: [Memo], owner: String, repository: String) -> [Memo] {
-        return [] // Stub: always returns empty — Implementer will provide real logic
+        memos.filter { memo in
+            memo.repositoryOwner == nil ||
+            (memo.repositoryOwner == owner && memo.repositoryName == repository)
+        }
     }
 }
 
