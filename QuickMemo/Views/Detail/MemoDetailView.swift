@@ -18,7 +18,7 @@ struct MemoDetailView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    TextField("タイトル", text: $viewModel.title)
+                    TextField("タイトル", text: $viewModel.title, axis: .vertical)
                         .font(.title2)
                         .fontWeight(.semibold)
 

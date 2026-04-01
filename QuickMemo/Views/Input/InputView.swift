@@ -14,7 +14,7 @@ struct InputView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TextField("タイトル", text: $viewModel.title)
+            TextField("タイトル", text: $viewModel.title, axis: .vertical)
                 .font(.headline)
                 .padding(.horizontal)
                 .padding(.top, 16)
