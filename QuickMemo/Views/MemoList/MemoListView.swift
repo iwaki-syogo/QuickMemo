@@ -11,15 +11,22 @@ struct MemoListView: View {
 
     // MARK: - Computed filters
 
-    private var pinnedMemos: [Memo] { MemoFilters.pinned(allMemos) }
-    private var openMemos: [Memo] { MemoFilters.open(allMemos) }
-    private var mergedMemos: [Memo] { MemoFilters.merged(allMemos) }
-    private var closedMemos: [Memo] { MemoFilters.closed(allMemos) }
+    private var scopedMemos: [Memo] {
+        if gitHubAccount.isLinked, gitHubAccount.hasRepository {
+            return MemoFilters.scoped(allMemos, owner: gitHubAccount.repositoryOwner, repository: gitHubAccount.repositoryName)
+        }
+        return allMemos
+    }
+
+    private var pinnedMemos: [Memo] { MemoFilters.pinned(scopedMemos) }
+    private var openMemos: [Memo] { MemoFilters.open(scopedMemos) }
+    private var mergedMemos: [Memo] { MemoFilters.merged(scopedMemos) }
+    private var closedMemos: [Memo] { MemoFilters.closed(scopedMemos) }
 
     var body: some View {
         VStack(spacing: 0) {
             Group {
-                if allMemos.isEmpty {
+                if scopedMemos.isEmpty {
                     emptyStateView
                 } else {
                     memoList

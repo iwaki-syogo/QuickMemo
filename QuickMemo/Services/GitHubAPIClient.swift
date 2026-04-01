@@ -164,7 +164,7 @@ struct GitHubAPIClient {
         return try JSONDecoder().decode([GitHubLabel].self, from: data)
     }
 
-    func fetchIssues(owner: String, repo: String, state: String = "all", page: Int = 1) async throws -> [GitHubIssueDetail] {
+    func fetchIssueDetails(owner: String, repo: String, state: String = "all", page: Int = 1) async throws -> [GitHubIssueDetail] {
         let (data, _) = try await makeRequest("/repos/\(owner)/\(repo)/issues?state=\(state)&per_page=100&page=\(page)")
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
