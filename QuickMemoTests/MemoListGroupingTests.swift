@@ -26,7 +26,7 @@ final class MemoListGroupingTests: XCTestCase {
         XCTAssertEqual(result.first?.title, "Open")
     }
 
-    // MARK: - Merged memos
+    // MARK: - Merged memos (unified into closed)
 
     func test_mergedMemos_filtersCorrectStatus() {
         let open = Memo(title: "Open", status: .open)
@@ -35,11 +35,10 @@ final class MemoListGroupingTests: XCTestCase {
 
         let result = MemoFilters.merged([open, closed, merged])
 
-        XCTAssertEqual(result.count, 1)
-        XCTAssertEqual(result.first?.title, "Merged")
+        XCTAssertEqual(result.count, 0, "merged() should return empty after unification")
     }
 
-    // MARK: - Closed memos
+    // MARK: - Closed memos (includes merged)
 
     func test_closedMemos_filtersCorrectStatus() {
         let open = Memo(title: "Open", status: .open)
@@ -48,8 +47,7 @@ final class MemoListGroupingTests: XCTestCase {
 
         let result = MemoFilters.closed([open, closed, merged])
 
-        XCTAssertEqual(result.count, 1)
-        XCTAssertEqual(result.first?.title, "Closed")
+        XCTAssertEqual(result.count, 2, "closed() should include both closed and merged memos")
     }
 
     // MARK: - Pinned memos

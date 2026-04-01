@@ -247,9 +247,6 @@ class SyncService {
         if issue.state == "open" {
             return .open
         }
-        if issue.stateReason == "completed" {
-            return .merged
-        }
         return .closed
     }
 

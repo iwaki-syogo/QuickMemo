@@ -11,11 +11,11 @@ enum MemoFilters {
     }
 
     static func merged(_ memos: [Memo]) -> [Memo] {
-        memos.filter { !$0.isPinned && $0.status == .merged }
+        return []
     }
 
     static func closed(_ memos: [Memo]) -> [Memo] {
-        memos.filter { !$0.isPinned && $0.status == .closed }
+        memos.filter { !$0.isPinned && ($0.status == .closed || $0.status == .merged) }
     }
 
     static func scoped(_ memos: [Memo], owner: String, repository: String) -> [Memo] {
