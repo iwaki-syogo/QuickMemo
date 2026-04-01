@@ -3,6 +3,7 @@ import SwiftUI
 struct MemoRowView: View {
     let memo: Memo
     var labels: [Label] = []
+    var showRepository: Bool = true
 
     var body: some View {
         HStack {
@@ -12,7 +13,7 @@ struct MemoRowView: View {
                     .fontWeight(.medium)
                     .lineLimit(1)
 
-                if let owner = memo.repositoryOwner, let repo = memo.repositoryName {
+                if showRepository, let owner = memo.repositoryOwner, let repo = memo.repositoryName {
                     Text("\(owner)/\(repo)")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
