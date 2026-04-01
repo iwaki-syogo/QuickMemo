@@ -45,16 +45,6 @@ class MemoListViewModel {
         }
     }
 
-    func deleteMemo(_ memo: Memo) {
-        guard let modelContext else { return }
-        modelContext.delete(memo)
-        do {
-            try modelContext.save()
-        } catch {
-            print("[QuickMemo] Failed to save after deleteMemo: \(error)")
-        }
-    }
-
     func togglePin(_ memo: Memo) {
         memo.isPinned.toggle()
         memo.updatedAt = Date()
