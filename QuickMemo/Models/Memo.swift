@@ -4,6 +4,7 @@ import SwiftData
 enum MemoStatus: String, Codable {
     case open
     case closed
+    case merged
 }
 
 enum SyncStatus: String, Codable {

@@ -184,7 +184,6 @@ class SyncService {
             }
         )
         let existingMemos = (try? context.fetch(existingDescriptor)) ?? []
-        let existingNumbers = Set(existingMemos.compactMap(\.githubIssueNumber))
 
         var page = 1
         while true {
@@ -200,13 +199,26 @@ class SyncService {
 
             for issue in issues {
                 guard !issue.isPullRequest else { continue }
-                guard !existingNumbers.contains(issue.number) else { continue }
+
+                let newStatus = memoStatus(from: issue)
+
+                // Update existing memo's status
+                if let existingMemo = existingMemos.first(where: { $0.githubIssueNumber == issue.number }) {
+                    if existingMemo.status != newStatus {
+                        existingMemo.status = newStatus
+                        existingMemo.updatedAt = Date()
+                    }
+                    continue
+                }
+
+                // Only import new open issues (skip old closed/merged issues)
+                guard issue.state == "open" else { continue }
 
                 let labelIDs = resolveOrCreateLabels(for: issue.labels, context: context)
                 let memo = Memo(
                     title: issue.title,
                     body: issue.body.flatMap { $0.isEmpty ? nil : $0 },
-                    status: issue.state == "open" ? .open : .closed,
+                    status: newStatus,
                     createdAt: issue.createdAt,
                     updatedAt: issue.updatedAt,
                     githubIssueNumber: issue.number,
@@ -225,6 +237,16 @@ class SyncService {
             if issues.count < 100 { break }
             page += 1
         }
+    }
+
+    private func memoStatus(from issue: GitHubIssueDetail) -> MemoStatus {
+        if issue.state == "open" {
+            return .open
+        }
+        if issue.stateReason == "completed" {
+            return .merged
+        }
+        return .closed
     }
 
     private func resolveOrCreateLabels(for githubLabels: [GitHubLabel], context: ModelContext) -> [UUID] {

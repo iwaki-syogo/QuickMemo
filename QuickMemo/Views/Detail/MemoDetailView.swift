@@ -158,21 +158,42 @@ struct MemoDetailView: View {
                 viewModel.toggleStatus()
             } label: {
                 HStack(spacing: 4) {
-                    Image(systemName: viewModel.status == .open ? "circle.fill" : "checkmark.circle.fill")
+                    Image(systemName: statusIcon)
                         .font(.caption)
-                    Text(viewModel.status == .open ? "オープン" : "クローズ")
+                    Text(statusLabel)
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }
-                .foregroundStyle(viewModel.status == .open ? Color.green : Color.secondary)
+                .foregroundStyle(statusColor)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(
-                    (viewModel.status == .open ? Color.green : Color.secondary)
-                        .opacity(0.12)
-                )
+                .background(statusColor.opacity(0.12))
                 .clipShape(Capsule())
             }
+        }
+    }
+
+    private var statusIcon: String {
+        switch viewModel.status {
+        case .open: "circle.fill"
+        case .merged: "arrow.triangle.merge"
+        case .closed: "checkmark.circle.fill"
+        }
+    }
+
+    private var statusLabel: String {
+        switch viewModel.status {
+        case .open: "オープン"
+        case .merged: "マージ済み"
+        case .closed: "クローズ"
+        }
+    }
+
+    private var statusColor: Color {
+        switch viewModel.status {
+        case .open: .green
+        case .merged: .purple
+        case .closed: .secondary
         }
     }
 
